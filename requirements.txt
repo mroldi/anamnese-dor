@@ -1,8 +1,17 @@
-fastapi==0.111.0
-uvicorn[standard]==0.29.0
-python-multipart==0.0.9
-jinja2==3.1.4
-gspread==6.1.2
-google-auth==2.29.0
-reportlab==4.2.0
-python-dotenv==1.0.1
+# Nunca suba credenciais para o GitHub!
+.env
+credentials.json
+*.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
