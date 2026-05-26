@@ -1132,9 +1132,10 @@
       </div>
     </section>
 
-    <!-- ══════════════ BOTÃO SALVAR ══════════════ -->
+    <!-- ══════════════ BOTÕES ══════════════ -->
     <div class="action-bar">
-      <button type="button" id="btnSalvar" class="btn btn-primary">💾 Salvar — Revisar antes de enviar</button>
+      <button type="button" id="btnSalvar" class="btn btn-secondary">💾 Salvar rascunho</button>
+      <button type="button" id="btnHistorico" class="btn btn-primary">📋 Ver histórico de anamneses</button>
     </div>
     <div id="status-msg" class="status-msg"></div>
 
@@ -1142,28 +1143,65 @@
 </main>
 
 <!-- ══════════════════════════════════════════════════════════
-     MODAL DE REVISÃO
+     PAINEL DE HISTÓRICO
 ══════════════════════════════════════════════════════════ -->
-<div id="reviewModal" class="review-modal" style="display:none">
-  <div class="review-overlay" id="reviewOverlay"></div>
+<div id="historicoModal" class="review-modal" style="display:none">
+  <div class="review-overlay" id="historicoOverlay"></div>
   <div class="review-panel">
+
+    <!-- Header -->
     <div class="review-header">
       <div class="review-header-left">
         <span class="logo-cross" style="font-size:20px;color:white">✚</span>
         <div>
           <p style="font-size:10px;opacity:.7;letter-spacing:.1em;text-transform:uppercase">Grupo de Dor · HC-FMUSP</p>
-          <h2 class="review-title">Revisão da Anamnese</h2>
+          <h2 class="review-title">Histórico de Anamneses</h2>
         </div>
       </div>
-      <button class="review-close" id="reviewClose" title="Fechar">✕</button>
+      <button class="review-close" id="historicoClose" title="Fechar">✕</button>
     </div>
-    <p class="review-hint">Revise os dados abaixo antes de enviar. Você pode editar qualquer campo diretamente aqui.</p>
-    <div class="review-body" id="reviewBody"></div>
+
+    <!-- Lista de rascunhos -->
+    <div class="review-body" id="historicoBody">
+      <!-- preenchido pelo JS -->
+    </div>
+
     <div class="review-footer">
-      <button type="button" id="btnVoltarEditar" class="btn btn-secondary">← Voltar e editar</button>
-      <button type="button" id="btnGerarProntuario" class="btn btn-accent">📄 Gerar Prontuário + Enviar ao Google Sheets</button>
+      <button type="button" id="btnFecharHistorico" class="btn btn-secondary">✕ Fechar</button>
     </div>
-    <div id="review-status" class="status-msg" style="margin:16px 24px 0"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     PAINEL DE EDIÇÃO DE RASCUNHO
+══════════════════════════════════════════════════════════ -->
+<div id="edicaoModal" class="review-modal" style="display:none">
+  <div class="review-overlay" id="edicaoOverlay"></div>
+  <div class="review-panel">
+
+    <div class="review-header">
+      <div class="review-header-left">
+        <span class="logo-cross" style="font-size:20px;color:white">✚</span>
+        <div>
+          <p style="font-size:10px;opacity:.7;letter-spacing:.1em;text-transform:uppercase">Grupo de Dor · HC-FMUSP</p>
+          <h2 class="review-title" id="edicaoTitulo">Editando Anamnese</h2>
+        </div>
+      </div>
+      <button class="review-close" id="edicaoClose" title="Fechar">✕</button>
+    </div>
+
+    <p class="review-hint">Edite os campos abaixo. Quando finalizar, clique em <strong>Gerar Prontuário</strong> para enviar ao Google Sheets e baixar o PDF.</p>
+
+    <div class="review-body" id="edicaoBody">
+      <!-- campos editáveis gerados pelo JS -->
+    </div>
+
+    <div class="review-footer">
+      <button type="button" id="btnVoltarHistorico" class="btn btn-secondary">← Voltar ao histórico</button>
+      <button type="button" id="btnSalvarEdicao" class="btn btn-secondary">💾 Salvar edição</button>
+      <button type="button" id="btnGerarProntuario" class="btn btn-accent">📄 Gerar Prontuário + Enviar Sheets</button>
+    </div>
+    <div id="edicao-status" class="status-msg" style="margin:16px 24px 0"></div>
   </div>
 </div>
 
