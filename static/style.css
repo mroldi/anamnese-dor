@@ -897,3 +897,91 @@ input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
   .review-body { padding: 16px; }
   .review-footer { flex-direction: column; }
 }
+
+/* ─── HISTÓRICO ──────────────────────────────────────────── */
+.historico-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-light);
+}
+.historico-empty .empty-icon { font-size: 48px; margin-bottom: 16px; }
+.historico-empty p { font-size: 14px; }
+
+.historico-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 4px 0;
+}
+
+.rascunho-card {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  transition: border-color .15s, box-shadow .15s;
+}
+.rascunho-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 12px rgba(155,28,46,.1);
+}
+.rascunho-info { flex: 1; }
+.rascunho-nome {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.rascunho-meta {
+  font-size: 12px;
+  color: var(--text-light);
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.rascunho-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.rascunho-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.btn-card {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: white;
+  cursor: pointer;
+  transition: all .12s;
+  color: var(--text-mid);
+}
+.btn-card:hover { border-color: var(--accent); color: var(--accent); }
+.btn-card.btn-card-primary {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+.btn-card.btn-card-primary:hover { background: var(--accent-dark); }
+.btn-card.btn-card-danger:hover { border-color: #c0392b; color: #c0392b; }
+
+.rascunho-vas {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 100px;
+}
