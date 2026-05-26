@@ -1,0 +1,19 @@
+# ══════════════════════════════════════════════════════════
+# VARIÁVEIS DE AMBIENTE — ANAMNESE DOR HC-FMUSP
+# ══════════════════════════════════════════════════════════
+# Copie este arquivo para .env e preencha os valores.
+# NUNCA suba o .env com valores reais para o GitHub!
+
+# ── Google Sheets ──────────────────────────────────────────
+# ID da planilha principal (retirar da URL: docs.google.com/spreadsheets/d/ESTE_ID/edit)
+GOOGLE_SHEET_ID=cole_aqui_o_id_da_planilha_principal
+
+# ID da planilha de backup (pode ser a mesma ou outra)
+GOOGLE_BACKUP_SHEET_ID=cole_aqui_o_id_da_planilha_backup
+
+# ── Credenciais da Service Account ────────────────────────
+# OPÇÃO A (recomendada para Render): cole o conteúdo do JSON em uma linha
+# GOOGLE_CREDENTIALS_JSON={"type":"service_account","project_id":"..."}
+
+# OPÇÃO B (desenvolvimento local): caminho para o arquivo JSON
+GOOGLE_CREDENTIALS_FILE=credentials.json
