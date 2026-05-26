@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: anamnese-dor-hcfmusp
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GOOGLE_SHEET_ID
+        sync: false        # você preenche no painel do Render
+      - key: GOOGLE_BACKUP_SHEET_ID
+        sync: false
+      - key: GOOGLE_CREDENTIALS_JSON
+        sync: false        # cole o JSON da service account aqui
+    healthCheckPath: /health
