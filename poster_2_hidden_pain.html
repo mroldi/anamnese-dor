@@ -7,29 +7,28 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ── IASP WCP 2026 Bangkok palette ── */
 :root {
-  --primary:  #0A2E2E;
-  --teal:     #006B5E;
-  --teal-lt:  #D0EDE8;
-  --navy:     #1A3A6B;
-  --gold:     #7A5C00;
-  --gold-lt:  #FFF8E1;
-  --red:      #B71C1C;
-  --bg:       #EAF3F1;
-  --white:    #FFFFFF;
-  --text:     #1A1A1A;
-  --muted:    #4B5568;
-  --border:   #C0D4D0;
+  --congress:  #1A2B72;   /* IASP nav bar navy       */
+  --mid-blue:  #2963C8;   /* congress button blue     */
+  --gold:      #C8960C;   /* Thai gold                */
+  --coral:     #C4532A;   /* Thai coral-orange        */
+  --teal:      #1E9696;   /* Thai turquoise           */
+  --bg:        #EBF0F8;   /* light congress blue-grey */
+  --light:     #D6DDF5;   /* pale congress blue       */
+  --white:     #FFFFFF;
+  --text:      #111827;
+  --muted:     #3D4F6E;
+  --border:    #BCC8E2;
 }
 
-/* Single font family throughout (per poster design guidelines) */
 html, body {
   width: 1122px;
-  background: #777;
+  background: #888;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
   color: var(--text);
-  line-height: 1.8; /* double spacing per guidelines */
+  line-height: 1.8;
 }
 
 .poster {
@@ -42,16 +41,15 @@ html, body {
 }
 
 /* ══════════════════════════════
-   HEADER — logo | title area | stats
+   HEADER  logo | title | stats
 ══════════════════════════════ */
 .poster-header {
-  background: var(--primary);
+  background: var(--congress);
   color: #fff;
   display: grid;
-  grid-template-columns: 98px 1fr 140px;
+  grid-template-columns: 100px 1fr 140px;
 }
 
-/* Logo — top left, per poster design guidelines */
 .header-logo {
   display: flex;
   flex-direction: column;
@@ -71,13 +69,10 @@ html, body {
   text-transform: uppercase;
 }
 
-.header-main {
-  padding: 20px 24px 17px;
-}
+.header-main { padding: 20px 24px 17px; }
 
-/* Title: equivalent to 96pt at print scale */
 .poster-title {
-  font-size: 23px;
+  font-size: 22px;
   font-weight: bold;
   line-height: 1.22;
   margin-bottom: 10px;
@@ -86,10 +81,9 @@ html, body {
 
 .poster-title em {
   font-style: normal;
-  color: #FDD835;
+  color: var(--gold);
 }
 
-/* Authors: equivalent to 48–72pt at print scale */
 .poster-authors {
   font-size: 10.5px;
   color: rgba(255,255,255,.88);
@@ -97,7 +91,6 @@ html, body {
   margin-bottom: 6px;
 }
 
-/* Institution: equivalent to 36–48pt at print scale */
 .poster-institution {
   font-size: 10px;
   font-style: italic;
@@ -111,14 +104,14 @@ html, body {
   align-items: center;
   justify-content: center;
   padding: 12px 8px;
-  background: rgba(255,255,255,.05);
+  background: rgba(255,255,255,.06);
   border-left: 1px solid rgba(255,255,255,.14);
   text-align: center;
   gap: 7px;
 }
 
 .hstat-box {
-  background: rgba(255,255,255,.1);
+  background: rgba(255,255,255,.10);
   border-radius: 5px;
   padding: 6px 10px;
   width: 100%;
@@ -128,7 +121,7 @@ html, body {
 .hstat-box .hval {
   font-size: 28px;
   font-weight: bold;
-  color: #fff;
+  color: var(--gold);
   line-height: 1;
   display: block;
 }
@@ -141,9 +134,16 @@ html, body {
   line-height: 1.3;
 }
 
+/* Thai-inspired gradient: gold → coral → teal */
 .accent-bar {
-  height: 5px;
-  background: linear-gradient(90deg, var(--teal) 0%, #26C6A8 40%, var(--gold) 72%, var(--primary) 100%);
+  height: 6px;
+  background: linear-gradient(90deg,
+    var(--gold)   0%,
+    #D4881A      20%,
+    var(--coral)  45%,
+    #D06030      65%,
+    var(--teal)   85%,
+    var(--congress) 100%);
 }
 
 /* ══════════════════════════════
@@ -176,25 +176,24 @@ html, body {
   border: 1px solid var(--border);
   border-radius: 5px;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0,0,0,.05);
+  box-shadow: 0 1px 4px rgba(26,43,114,.08);
 }
 
-/* Section headers: equivalent to 36pt bold at print scale */
 .section-title {
   font-size: 10px;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1.4px;
   color: #fff;
-  background: var(--primary);
+  background: var(--congress);
   padding: 6px 12px;
 }
 
-.section-title.teal  { background: var(--teal); }
+.section-title.blue  { background: var(--mid-blue); }
 .section-title.gold  { background: var(--gold); }
-.section-title.navy  { background: var(--navy); }
+.section-title.coral { background: var(--coral); }
+.section-title.teal  { background: var(--teal); }
 
-/* Body: minimum 24pt equivalent; double-spaced; justified */
 .section-body {
   padding: 11px 12px;
   font-size: 11.5px;
@@ -204,7 +203,7 @@ html, body {
 }
 
 .section-body p + p { margin-top: 7px; }
-.section-body sup { font-size: 9px; color: var(--teal); font-weight: bold; }
+.section-body sup { font-size: 9px; color: var(--mid-blue); font-weight: bold; }
 
 /* ══════════════════════════════
    METHODS GRID
@@ -220,7 +219,7 @@ html, body {
 
 .method-label {
   font-weight: bold;
-  color: var(--primary);
+  color: var(--congress);
   font-size: 10px;
   text-align: right;
   padding-top: 1px;
@@ -253,7 +252,7 @@ html, body {
 .prev-label {
   font-size: 13px;
   font-weight: bold;
-  color: var(--primary);
+  color: var(--congress);
   margin-top: 4px;
   margin-bottom: 2px;
 }
@@ -266,7 +265,7 @@ html, body {
 
 .prev-bar-wrap {
   margin-top: 10px;
-  background: #E8F5F3;
+  background: #DDE8F0;
   border-radius: 4px;
   height: 20px;
   width: 100%;
@@ -295,7 +294,7 @@ html, body {
 .fig-title {
   font-size: 10px;
   font-weight: bold;
-  color: var(--primary);
+  color: var(--congress);
   margin-bottom: 9px;
   text-transform: uppercase;
   letter-spacing: .7px;
@@ -310,10 +309,10 @@ html, body {
   margin-bottom: 3px;
 }
 
-.hbar-label  { font-size: 11px; color: var(--text); }
-.hbar-value  { font-size: 12px; font-weight: bold; color: var(--primary); }
+.hbar-label { font-size: 11px; color: var(--text); }
+.hbar-value { font-size: 12px; font-weight: bold; color: var(--congress); }
 
-.hbar-track  { background: #E0F0EE; border-radius: 3px; height: 17px; width: 100%; }
+.hbar-track { background: #DDE4F2; border-radius: 3px; height: 17px; width: 100%; }
 
 .hbar-fill {
   height: 100%;
@@ -348,8 +347,8 @@ html, body {
 }
 
 .ibox {
-  background: var(--teal-lt);
-  border: 1.5px solid var(--teal);
+  background: #E8F0FC;
+  border: 1.5px solid var(--mid-blue);
   border-radius: 5px;
   padding: 9px 12px;
   text-align: center;
@@ -358,7 +357,7 @@ html, body {
 .ibox .ibox-n {
   font-size: 24px;
   font-weight: bold;
-  color: var(--teal);
+  color: var(--mid-blue);
   line-height: 1;
   display: block;
 }
@@ -366,27 +365,26 @@ html, body {
 .ibox .ibox-label {
   font-size: 11px;
   line-height: 1.5;
-  color: var(--primary);
+  color: var(--congress);
   margin-top: 3px;
 }
 
 .ibox.gold-box {
-  background: var(--gold-lt);
+  background: #FDF5DC;
   border-color: var(--gold);
 }
 .ibox.gold-box .ibox-n { color: var(--gold); }
 
-.ibox.navy-box {
-  background: #E8EDF7;
-  border-color: var(--navy);
+.ibox.teal-box {
+  background: #E0F4F4;
+  border-color: var(--teal);
 }
-.ibox.navy-box .ibox-n { color: var(--navy); font-size: 18px; }
+.ibox.teal-box .ibox-n { color: var(--teal); font-size: 20px; }
 
 .iarrow {
   text-align: center;
   font-size: 16px;
   color: var(--muted);
-  line-height: 1.2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -400,12 +398,12 @@ html, body {
 }
 
 .bidirectional {
-  background: var(--gold-lt);
+  background: #FDF5DC;
   border: 1.5px dashed var(--gold);
   border-radius: 5px;
   padding: 8px 12px;
   font-size: 11px;
-  color: var(--primary);
+  color: var(--congress);
   line-height: 1.65;
   margin-top: 6px;
   text-align: justify;
@@ -416,13 +414,14 @@ html, body {
    KEY FINDING
 ══════════════════════════════ */
 .key-finding {
-  background: var(--primary);
+  background: var(--congress);
   color: #fff;
   border-radius: 5px;
   padding: 13px 14px;
   font-size: 12px;
   line-height: 1.8;
   text-align: justify;
+  border-left: 5px solid var(--gold);
 }
 
 .key-finding-title {
@@ -430,7 +429,7 @@ html, body {
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1.4px;
-  color: #FDD835;
+  color: var(--gold);
   margin-bottom: 7px;
   display: block;
 }
@@ -482,13 +481,13 @@ html, body {
 }
 .references ol { padding-left: 15px; }
 .references li { margin-bottom: 3px; }
-.references a  { color: var(--teal); text-decoration: none; }
+.references a  { color: var(--mid-blue); text-decoration: none; }
 
 /* ══════════════════════════════
    FOOTER
 ══════════════════════════════ */
 .poster-footer {
-  background: var(--primary);
+  background: var(--congress);
   color: rgba(255,255,255,.7);
   font-size: 8.5px;
   padding: 7px 22px;
@@ -496,6 +495,7 @@ html, body {
   justify-content: space-between;
   align-items: center;
   letter-spacing: .2px;
+  border-top: 3px solid var(--gold);
 }
 .poster-footer strong { color: #fff; }
 </style>
@@ -503,32 +503,28 @@ html, body {
 <body>
 <div class="poster">
 
-<!-- ═══════════════════════════════════
+<!-- ══════════════════════════════════
      HEADER
-═══════════════════════════════════ -->
+══════════════════════════════════ -->
 <header class="poster-header">
 
-  <!-- Logo — top left, per poster design guidelines -->
+  <!-- Logo — top left per poster guidelines -->
   <div class="header-logo">
-    <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="HCFMUSP IOT logo">
-      <!-- Shield outline -->
+    <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
       <path d="M32 3 L54 12 L54 36 Q54 54 32 62 Q10 54 10 36 L10 12 Z"
-            fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.42)" stroke-width="1.5"/>
-      <!-- Cross symbol -->
-      <line x1="32" y1="12" x2="32" y2="22" stroke="rgba(255,255,255,0.52)" stroke-width="2"/>
-      <line x1="27" y1="17" x2="37" y2="17" stroke="rgba(255,255,255,0.52)" stroke-width="2"/>
-      <!-- Text -->
+            fill="rgba(255,255,255,0.10)" stroke="rgba(200,150,12,0.7)" stroke-width="1.5"/>
+      <line x1="32" y1="12" x2="32" y2="22" stroke="rgba(200,150,12,0.8)" stroke-width="2"/>
+      <line x1="27" y1="17" x2="37" y2="17" stroke="rgba(200,150,12,0.8)" stroke-width="2"/>
       <text x="32" y="34" text-anchor="middle" fill="white"
             font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">HC</text>
-      <text x="32" y="43" text-anchor="middle" fill="rgba(255,255,255,0.75)"
+      <text x="32" y="43" text-anchor="middle" fill="rgba(255,255,255,0.78)"
             font-family="Arial,Helvetica,sans-serif" font-size="7">FMUSP</text>
-      <text x="32" y="52" text-anchor="middle" fill="rgba(255,255,255,0.75)"
+      <text x="32" y="52" text-anchor="middle" fill="rgba(255,255,255,0.78)"
             font-family="Arial,Helvetica,sans-serif" font-size="7">IOT</text>
     </svg>
     <span class="header-logo-text">S&atilde;o Paulo<br>Brazil</span>
   </div>
 
-  <!-- Title, authors, institution -->
   <div class="header-main">
     <h1 class="poster-title">
       The <em>Hidden Pain</em>: Importance of Myofascial Pain Syndrome
@@ -548,17 +544,16 @@ html, body {
     </p>
   </div>
 
-  <!-- Key statistics -->
   <div class="header-stat">
     <div class="hstat-box">
       <span class="hval">91</span>
       <span class="hlbl">Total patients<br>evaluated</span>
     </div>
-    <div class="hstat-box" style="background:rgba(0,107,94,.40);">
-      <span class="hval" style="font-size:21px;">76.9%</span>
+    <div class="hstat-box" style="background:rgba(30,150,150,.35);">
+      <span class="hval" style="color:#5CE8E8;font-size:21px;">76.9%</span>
       <span class="hlbl">Overall MPS<br>prevalence</span>
     </div>
-    <div class="hstat-box" style="background:rgba(122,92,0,.35);">
+    <div class="hstat-box" style="background:rgba(200,150,12,.30);">
       <span class="hval" style="font-size:21px;">70%</span>
       <span class="hlbl">Neuropathic pts<br>with MPS</span>
     </div>
@@ -567,20 +562,20 @@ html, body {
 </header>
 <div class="accent-bar"></div>
 
-<!-- ═══════════════════════════════════
-     BODY — 3 columns
-═══════════════════════════════════ -->
+<!-- ══════════════════════════════════
+     BODY
+══════════════════════════════════ -->
 <main class="poster-body">
 
-  <!-- ── COLUMN 1: BACKGROUND & METHODS ── -->
+  <!-- ── COLUMN 1 ── -->
   <div class="col">
 
     <div class="section-card">
       <div class="section-title">1. Background</div>
       <div class="section-body">
-        <p>Myofascial pain syndrome (MPS), characterised by the presence of myofascial trigger points (MTrPs), is recognised as one of the <strong>most prevalent causes of musculoskeletal pain</strong> in clinical practice.<sup>1,5</sup> Clinical diagnosis is based on standardised palpation techniques to identify taut muscle bands and associated referred pain patterns.<sup>1</sup></p>
-        <p>According to the IASP taxonomy, chronic pain is classified as nociceptive, neuropathic, or nociplastic. MPS has traditionally been categorised within the nociceptive phenotype; however, accumulating evidence indicates its frequent co-occurrence with neuropathic or nociplastic mechanisms — constituting what is now termed the <strong>mixed-pain phenotype</strong>.<sup>2,3,6</sup></p>
-        <p>In orthopedic settings, structural diagnoses (e.g., degenerative joint disease, post-surgical states) may overshadow the MPS component, rendering it a clinically <em>hidden</em> yet functionally significant contributor to pain burden and treatment failure.<sup>4</sup> Recognition of MPS is therapeutically critical, as its management diverges substantially from purely structural or neuropathically-directed approaches.<sup>2,3</sup></p>
+        <p>Myofascial pain syndrome (MPS), characterised by the presence of myofascial trigger points (MTrPs), is recognised as one of the <strong>most prevalent causes of musculoskeletal pain</strong> in clinical practice.<sup>1,5</sup> Clinical diagnosis is based on standardised palpation to identify taut muscle bands and referred pain patterns.<sup>1</sup></p>
+        <p>According to the IASP taxonomy, chronic pain is classified as nociceptive, neuropathic, or nociplastic. MPS has traditionally been categorised within the nociceptive phenotype; however, accumulating evidence indicates frequent co-occurrence with neuropathic or nociplastic mechanisms — constituting the <strong>mixed-pain phenotype</strong>.<sup>2,3,6</sup></p>
+        <p>In orthopedic settings, structural diagnoses may overshadow the MPS component, rendering it a clinically <em>hidden</em> yet functionally significant contributor to pain burden and treatment failure.<sup>4</sup> Recognition of MPS is therapeutically critical, as its management diverges substantially from structural or neuropathically-directed approaches.<sup>2,3</sup></p>
       </div>
     </div>
 
@@ -601,7 +596,7 @@ html, body {
           </div>
           <div class="method-row">
             <span class="method-label">Setting</span>
-            <span class="method-value">Interdisciplinary Pain Clinic (IPC), IOT, HCFMUSP — quaternary-level public teaching hospital, S&atilde;o Paulo, Brazil</span>
+            <span class="method-value">IPC, IOT, HCFMUSP — quaternary-level public teaching hospital, S&atilde;o Paulo, Brazil</span>
           </div>
           <div class="method-row">
             <span class="method-label">Population</span>
@@ -609,11 +604,11 @@ html, body {
           </div>
           <div class="method-row">
             <span class="method-label">Variables</span>
-            <span class="method-value">Demographics; pain location; pain type (nociceptive / neuropathic / nociplastic / mixed); MPS diagnosis; prior treatments and outcomes</span>
+            <span class="method-value">Demographics; pain location; pain type (nociceptive / neuropathic / nociplastic / mixed); MPS diagnosis; prior treatments</span>
           </div>
           <div class="method-row">
             <span class="method-label">Assessment</span>
-            <span class="method-value">Standardised comprehensive musculoskeletal and neurological examination, including systematic MTrP assessment by palpation, performed in all patients by the interdisciplinary pain team</span>
+            <span class="method-value">Standardised comprehensive musculoskeletal and neurological examination, including systematic MTrP assessment by palpation, in all patients</span>
           </div>
         </div>
       </div>
@@ -621,25 +616,24 @@ html, body {
 
     <div class="section-card">
       <div class="section-title teal">Orthopedic Subspecialties Represented</div>
-      <div class="section-body" style="display:flex;flex-wrap:wrap;gap:5px;padding:9px 11px;text-align:left;">
-        <span style="background:var(--teal-lt);border:1px solid var(--teal);border-radius:4px;padding:3px 9px;font-size:10.5px;color:#004A40;">Spinal Unit</span>
-        <span style="background:var(--teal-lt);border:1px solid var(--teal);border-radius:4px;padding:3px 9px;font-size:10.5px;color:#004A40;">Shoulder &amp; Elbow</span>
-        <span style="background:var(--teal-lt);border:1px solid var(--teal);border-radius:4px;padding:3px 9px;font-size:10.5px;color:#004A40;">Knee</span>
-        <span style="background:var(--teal-lt);border:1px solid var(--teal);border-radius:4px;padding:3px 9px;font-size:10.5px;color:#004A40;">Hand &amp; Microsurgery</span>
-        <span style="background:var(--teal-lt);border:1px solid var(--teal);border-radius:4px;padding:3px 9px;font-size:10.5px;color:#004A40;">Hip</span>
-        <span style="background:var(--teal-lt);border:1px solid var(--teal);border-radius:4px;padding:3px 9px;font-size:10.5px;color:#004A40;">Lower Limb</span>
-        <span style="background:var(--teal-lt);border:1px solid var(--teal);border-radius:4px;padding:3px 9px;font-size:10.5px;color:#004A40;">Pediatric Orthopedics</span>
+      <div style="display:flex;flex-wrap:wrap;gap:5px;padding:9px 11px;">
+        <span style="background:#E0F4F4;border:1px solid var(--teal);border-radius:4px;padding:3px 9px;font-size:10.5px;color:#115555;">Spinal Unit</span>
+        <span style="background:#E0F4F4;border:1px solid var(--teal);border-radius:4px;padding:3px 9px;font-size:10.5px;color:#115555;">Shoulder &amp; Elbow</span>
+        <span style="background:#E0F4F4;border:1px solid var(--teal);border-radius:4px;padding:3px 9px;font-size:10.5px;color:#115555;">Knee</span>
+        <span style="background:#E0F4F4;border:1px solid var(--teal);border-radius:4px;padding:3px 9px;font-size:10.5px;color:#115555;">Hand &amp; Microsurgery</span>
+        <span style="background:#E0F4F4;border:1px solid var(--teal);border-radius:4px;padding:3px 9px;font-size:10.5px;color:#115555;">Hip</span>
+        <span style="background:#E0F4F4;border:1px solid var(--teal);border-radius:4px;padding:3px 9px;font-size:10.5px;color:#115555;">Lower Limb</span>
+        <span style="background:#E0F4F4;border:1px solid var(--teal);border-radius:4px;padding:3px 9px;font-size:10.5px;color:#115555;">Pediatric Orthopedics</span>
       </div>
     </div>
 
   </div><!-- /col 1 -->
 
-  <!-- ── COLUMN 2: RESULTS ── -->
+  <!-- ── COLUMN 2 ── -->
   <div class="col">
 
     <div class="section-card">
       <div class="section-title teal">4. Results — Overall MPS Prevalence</div>
-
       <div class="prevalence-visual">
         <p class="prev-fraction">70 of 91 patients</p>
         <span class="prev-big">76.9%</span>
@@ -649,19 +643,16 @@ html, body {
           <div class="prev-bar-fill">76.9% — MPS (n = 70)</div>
         </div>
       </div>
-
       <p class="figure-caption" style="padding:0 12px 10px;">
-        <strong>Figure 1.</strong> Overall prevalence of MPS in the study cohort (n&nbsp;=&nbsp;91).
-        MPS was identified in 70 patients across all orthopedic subspecialties.
+        <strong>Figure 1.</strong> Overall prevalence of MPS in the study cohort (n&nbsp;=&nbsp;91). MPS was identified in 70 patients across all orthopedic subspecialties.
       </p>
     </div>
 
     <div class="section-card">
       <div class="section-title teal">4. Results — MPS Prevalence by Pain Location</div>
       <div class="figure-wrap">
-        <div class="fig-title">Figure 2. MPS prevalence stratified by anatomical pain region</div>
+        <div class="fig-title">Figure 2. MPS prevalence by anatomical pain region</div>
         <div class="hbar-chart">
-
           <div>
             <div class="hbar-label-row">
               <span class="hbar-label">Spinal pain (n&nbsp;=&nbsp;21)</span>
@@ -671,17 +662,15 @@ html, body {
               <div class="hbar-fill" style="width:95.2%;background:var(--teal);">20/21</div>
             </div>
           </div>
-
           <div>
             <div class="hbar-label-row">
               <span class="hbar-label">Shoulder pain (n&nbsp;=&nbsp;11)</span>
               <span class="hbar-value">72.7%</span>
             </div>
             <div class="hbar-track">
-              <div class="hbar-fill" style="width:72.7%;background:var(--navy);">8/11</div>
+              <div class="hbar-fill" style="width:72.7%;background:var(--mid-blue);">8/11</div>
             </div>
           </div>
-
           <div>
             <div class="hbar-label-row">
               <span class="hbar-label">Lower limb pain (n&nbsp;=&nbsp;22)</span>
@@ -691,14 +680,13 @@ html, body {
               <div class="hbar-fill" style="width:72.7%;background:var(--gold);">16/22</div>
             </div>
           </div>
-
         </div>
-        <p class="figure-caption"><strong>Figure 2.</strong> MPS prevalence was highest among patients with spinal pain (95.2%), followed by shoulder pain (72.7%) and lower limb pain (72.7%), indicating a consistent pattern of musculoskeletal co-diagnosis across anatomical regions.</p>
+        <p class="figure-caption"><strong>Figure 2.</strong> MPS prevalence was highest among patients with spinal pain (95.2%), followed by shoulder pain (72.7%) and lower limb pain (72.7%), confirming a consistent pattern of musculoskeletal co-diagnosis across anatomical regions.</p>
       </div>
     </div>
 
     <div class="key-finding">
-      <span class="key-finding-title">Principal Finding</span>
+      <span class="key-finding-title">&#9733; Principal Finding</span>
       MPS was identified in <strong>76.9%</strong> of chronic orthopedic pain patients
       and constituted the predominant musculoskeletal co-diagnosis across all
       anatomical regions evaluated. The highest prevalence was observed in patients
@@ -709,7 +697,7 @@ html, body {
 
   </div><!-- /col 2 -->
 
-  <!-- ── COLUMN 3: RESULTS (cont.) + CONCLUSIONS + REFERENCES ── -->
+  <!-- ── COLUMN 3 ── -->
   <div class="col">
 
     <div class="section-card">
@@ -728,10 +716,10 @@ html, body {
           <span>&#9660;</span>
         </div>
 
-        <div class="ibox navy-box">
+        <div class="ibox teal-box">
           <span class="ibox-n">27 patients (29.7%)</span>
           <span class="ibox-label">Neuropathic pain component identified<br>
-            <small style="font-size:10px;color:#666;">(primary or secondary pain classification)</small>
+            <small style="font-size:10px;color:#555;">(primary or secondary pain classification)</small>
           </span>
         </div>
 
@@ -745,7 +733,7 @@ html, body {
           <span class="ibox-n">70%</span>
           <span class="ibox-label">of neuropathic pain patients<br>
             <strong>also presented MPS</strong> (mixed-pain phenotype)<br>
-            <small style="font-size:10px;color:#666;">~19 patients with neuropathic + MPS</small>
+            <small style="font-size:10px;color:#555;">~19 patients with neuropathic + MPS</small>
           </span>
         </div>
 
@@ -759,7 +747,7 @@ html, body {
       </div>
 
       <p class="figure-caption" style="padding:0 12px 11px;">
-        <strong>Figure 3.</strong> Flow diagram illustrating the interaction between neuropathic pain and MPS in the study cohort (n&nbsp;=&nbsp;91). Proportions reflect primary and secondary pain-type classification.
+        <strong>Figure 3.</strong> Flow diagram illustrating the interaction between neuropathic pain and MPS (n&nbsp;=&nbsp;91). Proportions reflect primary and secondary pain-type classification.
       </p>
     </div>
 
@@ -768,23 +756,23 @@ html, body {
       <ul class="concl-list">
         <li>
           <span class="concl-num">1</span>
-          <span>MPS was identified in <strong>76.9% of chronic pain patients</strong> in a quaternary orthopedic setting (70/91), confirming it as a high-prevalence, yet frequently overlooked, clinical entity across orthopedic subspecialties.</span>
+          <span>MPS was identified in <strong>76.9% of chronic pain patients</strong> in a quaternary orthopedic setting (70/91), confirming it as a high-prevalence, yet frequently overlooked, clinical entity.</span>
         </li>
         <li>
           <span class="concl-num">2</span>
-          <span>MPS prevalence was notably high across anatomical locations: spinal pain <strong>(95.2%)</strong>, shoulder pain (72.7%), and lower limb pain (72.7%), underscoring the transregional nature of MPS as a co-diagnosis in orthopedic populations.</span>
+          <span>MPS prevalence was high across anatomical locations: spinal <strong>(95.2%)</strong>, shoulder (72.7%), and lower limb (72.7%), underscoring its transregional nature as a co-diagnosis.</span>
         </li>
         <li>
           <span class="concl-num">3</span>
-          <span>Among 27 patients (29.7%) with a neuropathic pain component, <strong>70% also presented MPS</strong>, establishing the mixed-pain phenotype as a common clinical reality in this context.</span>
+          <span>Among 27 patients (29.7%) with neuropathic pain, <strong>70% also presented MPS</strong>, establishing the mixed-pain phenotype as a common clinical reality.</span>
         </li>
         <li>
           <span class="concl-num">4</span>
-          <span>The bidirectional overlap — with approximately 27% of MPS patients also exhibiting a neuropathic component — is consistent with the hypothesis that peripheral MTrP input may sustain or co-occur with central sensitisation mechanisms.<sup>6</sup></span>
+          <span>The bidirectional overlap (~27% of MPS patients with neuropathic component) is consistent with the hypothesis that peripheral MTrP input may sustain or co-occur with central sensitisation mechanisms.<sup>6</sup></span>
         </li>
         <li>
           <span class="concl-num">5</span>
-          <span>Systematic musculoskeletal examination, including MTrP assessment by palpation, should be incorporated into the <strong>routine evaluation of all chronic pain patients</strong> referred to orthopedic subspecialties, to avoid under-diagnosis and treatment failure in the mixed-pain subgroup.<sup>2,3,4</sup></span>
+          <span>Systematic MTrP assessment by palpation should be incorporated into <strong>routine evaluation of all chronic pain patients</strong> referred to orthopedic subspecialties, to prevent under-diagnosis and treatment failure.<sup>2,3,4</sup></span>
         </li>
       </ul>
     </div>
@@ -798,7 +786,7 @@ html, body {
           <li>Urits I, Charipova K, Gress K, et al. Treatment and management of myofascial pain syndrome. <em>Best Pract Res Clin Anaesthesiol</em>. 2020;34(3):427–448. <a href="https://doi.org/10.1016/j.bpa.2020.08.003">doi:10.1016/j.bpa.2020.08.003</a></li>
           <li>Cohen SP, Vase L, Hooten WM. Chronic pain: an update on burden, best practices, and new advances. <em>Lancet</em>. 2021;397(10289):2082–2097. <a href="https://doi.org/10.1016/S0140-6736(21)00393-7">doi:10.1016/S0140-6736(21)00393-7</a></li>
           <li>Weller JL, Comeau D, Otis JAD. Myofascial pain. <em>Semin Neurol</em>. 2018;38(6):640–643. <a href="https://doi.org/10.1055/s-0038-1673674">doi:10.1055/s-0038-1673674</a></li>
-          <li>Fern&aacute;ndez-de-Las-Pe&ntilde;as C, Nijs J, Cagnie B, et al. Myofascial pain syndrome: a nociceptive condition comorbid with neuropathic or nociplastic pain. <em>Life (Basel)</em>. 2023;13(3):694. <a href="https://doi.org/10.3390/life13030694">doi:10.3390/life13030694</a></li>
+          <li>Fern&aacute;ndez-de-Las-Pe&ntilde;as C, Nijs J, Cagnie B, et al. MPS: a nociceptive condition comorbid with neuropathic or nociplastic pain. <em>Life (Basel)</em>. 2023;13(3):694. <a href="https://doi.org/10.3390/life13030694">doi:10.3390/life13030694</a></li>
         </ol>
         <p style="margin-top:5px;font-style:italic;">References retrieved via PubMed (pubmed.ncbi.nlm.nih.gov).</p>
       </div>
@@ -808,11 +796,11 @@ html, body {
 
 </main>
 
-<!-- ═══════════════════════════════════
+<!-- ══════════════════════════════════
      FOOTER
-═══════════════════════════════════ -->
+══════════════════════════════════ -->
 <footer class="poster-footer">
-  <span>Retrospective observational study &bull; IOT &ndash; HCFMUSP &bull; S&atilde;o Paulo, Brazil &bull; 2025</span>
+  <span>IASP World Congress on Pain 2026 &bull; Bangkok, Thailand &bull; IOT &ndash; HCFMUSP &bull; S&atilde;o Paulo, Brazil</span>
   <span><strong>Correspondence:</strong> yeng.lt@hc.fm.usp.br</span>
   <span>MPS&nbsp;=&nbsp;myofascial pain syndrome &bull; MTrP&nbsp;=&nbsp;myofascial trigger point &bull; IASP&nbsp;=&nbsp;International Association for the Study of Pain &bull; IPC&nbsp;=&nbsp;interdisciplinary pain clinic</span>
 </footer>

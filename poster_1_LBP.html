@@ -7,28 +7,28 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ── IASP WCP 2026 Bangkok palette ── */
 :root {
-  --primary:   #0B2549;
-  --secondary: #1A4A8A;
-  --light:     #D6E4F7;
-  --accent:    #B71C1C;
-  --green:     #2E7D32;
-  --purple:    #6A1A8A;
-  --bg:        #EDF2F7;
+  --congress:  #1A2B72;   /* IASP nav bar navy       */
+  --mid-blue:  #2963C8;   /* congress button blue     */
+  --gold:      #C8960C;   /* Thai gold                */
+  --coral:     #C4532A;   /* Thai coral-orange        */
+  --teal:      #1E9696;   /* Thai turquoise           */
+  --bg:        #EBF0F8;   /* light congress blue-grey */
+  --light:     #D6DDF5;   /* pale congress blue       */
   --white:     #FFFFFF;
-  --text:      #1A1A1A;
-  --muted:     #4B5563;
-  --border:    #C5D0DE;
+  --text:      #111827;
+  --muted:     #3D4F6E;
+  --border:    #BCC8E2;
 }
 
-/* Single font family throughout (per PDF guidelines) */
 html, body {
   width: 1122px;
-  background: #777;
+  background: #888;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
   color: var(--text);
-  line-height: 1.8; /* double spacing per PDF */
+  line-height: 1.8;
 }
 
 .poster {
@@ -41,16 +41,15 @@ html, body {
 }
 
 /* ══════════════════════════════
-   HEADER — logo | title area | stat
+   HEADER  logo | title | stat
 ══════════════════════════════ */
 .poster-header {
-  background: var(--primary);
+  background: var(--congress);
   color: #fff;
   display: grid;
-  grid-template-columns: 98px 1fr 128px;
+  grid-template-columns: 100px 1fr 128px;
 }
 
-/* Logo column — left, per PDF recommendation */
 .header-logo {
   display: flex;
   flex-direction: column;
@@ -70,11 +69,8 @@ html, body {
   text-transform: uppercase;
 }
 
-.header-main {
-  padding: 20px 24px 17px;
-}
+.header-main { padding: 20px 24px 17px; }
 
-/* Title: equivalent to 96pt at print scale */
 .poster-title {
   font-size: 24px;
   font-weight: bold;
@@ -83,7 +79,6 @@ html, body {
   color: #fff;
 }
 
-/* Authors: equivalent to 48–72pt at print scale */
 .poster-authors {
   font-size: 10.5px;
   color: rgba(255,255,255,.88);
@@ -91,7 +86,6 @@ html, body {
   margin-bottom: 6px;
 }
 
-/* Institution: equivalent to 36–48pt at print scale */
 .poster-institution {
   font-size: 10px;
   font-style: italic;
@@ -105,7 +99,7 @@ html, body {
   align-items: center;
   justify-content: center;
   padding: 18px 10px;
-  background: rgba(255,255,255,.06);
+  background: rgba(255,255,255,.07);
   border-left: 1px solid rgba(255,255,255,.15);
   text-align: center;
 }
@@ -122,7 +116,7 @@ html, body {
 .header-stat .n-value {
   font-size: 52px;
   font-weight: bold;
-  color: #fff;
+  color: var(--gold);
   line-height: 1;
   display: block;
 }
@@ -134,9 +128,16 @@ html, body {
   line-height: 1.3;
 }
 
+/* Thai-inspired accent bar: gold → coral → teal */
 .accent-bar {
-  height: 5px;
-  background: linear-gradient(90deg, var(--accent) 0%, #E53935 35%, #1565C0 65%, var(--primary) 100%);
+  height: 6px;
+  background: linear-gradient(90deg,
+    var(--gold)   0%,
+    #D4881A      20%,
+    var(--coral)  45%,
+    #D06030      65%,
+    var(--teal)   85%,
+    var(--congress) 100%);
 }
 
 /* ══════════════════════════════
@@ -169,25 +170,24 @@ html, body {
   border: 1px solid var(--border);
   border-radius: 5px;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0,0,0,.05);
+  box-shadow: 0 1px 4px rgba(26,43,114,.08);
 }
 
-/* Section headers: equivalent to 36pt bold at print scale */
 .section-title {
   font-size: 10px;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1.4px;
   color: #fff;
-  background: var(--primary);
+  background: var(--congress);
   padding: 6px 12px;
 }
 
-.section-title.blue   { background: var(--secondary); }
-.section-title.red    { background: var(--accent); }
-.section-title.green  { background: var(--green); }
+.section-title.blue  { background: var(--mid-blue); }
+.section-title.gold  { background: var(--gold); color: #fff; }
+.section-title.coral { background: var(--coral); }
+.section-title.teal  { background: var(--teal); }
 
-/* Body: minimum 24pt equivalent; double-spaced; justified */
 .section-body {
   padding: 11px 12px;
   font-size: 11.5px;
@@ -197,7 +197,7 @@ html, body {
 }
 
 .section-body p + p { margin-top: 7px; }
-.section-body sup { font-size: 9px; color: var(--secondary); font-weight: bold; }
+.section-body sup { font-size: 9px; color: var(--mid-blue); font-weight: bold; }
 
 /* ══════════════════════════════
    TABLE 1
@@ -220,22 +220,22 @@ html, body {
 
 .data-table thead th {
   background: var(--light);
-  color: var(--primary);
+  color: var(--congress);
   font-size: 9.5px;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: .7px;
   padding: 6px 10px;
   text-align: left;
-  border-bottom: 2px solid var(--primary);
+  border-bottom: 2px solid var(--congress);
 }
 
 .data-table thead th:last-child { text-align: right; }
-.data-table tbody tr:nth-child(even) td { background: #F6F9FD; }
+.data-table tbody tr:nth-child(even) td { background: #F4F6FB; }
 
 .data-table tbody td {
   padding: 5px 10px;
-  border-bottom: 1px solid #E4ECF4;
+  border-bottom: 1px solid #DDE4F0;
   vertical-align: middle;
   line-height: 1.5;
 }
@@ -243,7 +243,7 @@ html, body {
 .data-table tbody td:last-child {
   text-align: right;
   font-weight: bold;
-  color: var(--secondary);
+  color: var(--mid-blue);
   white-space: nowrap;
 }
 
@@ -268,7 +268,7 @@ html, body {
 .fig-title {
   font-size: 10px;
   font-weight: bold;
-  color: var(--primary);
+  color: var(--congress);
   margin-bottom: 9px;
   text-transform: uppercase;
   letter-spacing: .7px;
@@ -284,10 +284,10 @@ html, body {
   margin-bottom: 3px;
 }
 
-.hbar-label  { font-size: 11px; color: var(--text); }
-.hbar-value  { font-size: 12px; font-weight: bold; color: var(--primary); }
+.hbar-label { font-size: 11px; color: var(--text); }
+.hbar-value { font-size: 12px; font-weight: bold; color: var(--congress); }
 
-.hbar-track  { background: #EEF2F9; border-radius: 3px; height: 16px; width: 100%; }
+.hbar-track { background: #DDE4F2; border-radius: 3px; height: 16px; width: 100%; }
 
 .hbar-fill {
   height: 100%;
@@ -300,7 +300,7 @@ html, body {
   color: white;
 }
 
-/* Segmented bar (pain classification) */
+/* Segmented bar */
 .seg-bar-wrap { padding: 11px 12px 10px; }
 
 .seg-bar {
@@ -313,7 +313,7 @@ html, body {
 }
 
 .seg-a {
-  background: var(--secondary);
+  background: var(--mid-blue);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -324,7 +324,7 @@ html, body {
 }
 
 .seg-b {
-  background: var(--accent);
+  background: var(--coral);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -354,8 +354,8 @@ html, body {
 }
 
 .mps-highlight {
-  background: #E8F5E9;
-  border: 1.5px solid var(--green);
+  background: #E8F5F0;
+  border: 1.5px solid var(--teal);
   border-radius: 5px;
   padding: 8px 10px;
   margin-top: 8px;
@@ -364,7 +364,7 @@ html, body {
   color: var(--text);
   text-align: justify;
 }
-.mps-highlight strong { color: var(--green); }
+.mps-highlight strong { color: var(--teal); }
 
 /* Methods grid */
 .method-grid { display: flex; flex-direction: column; gap: 5px; font-size: 11px; }
@@ -378,7 +378,7 @@ html, body {
 
 .method-label {
   font-weight: bold;
-  color: var(--primary);
+  color: var(--congress);
   font-size: 10px;
   text-align: right;
   padding-top: 1px;
@@ -390,13 +390,14 @@ html, body {
    KEY FINDING
 ══════════════════════════════ */
 .key-finding {
-  background: var(--primary);
+  background: var(--congress);
   color: #fff;
   border-radius: 5px;
   padding: 13px 14px;
   font-size: 12px;
   line-height: 1.8;
   text-align: justify;
+  border-left: 5px solid var(--gold);
 }
 
 .key-finding-title {
@@ -404,7 +405,7 @@ html, body {
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1.4px;
-  color: #FDD835;
+  color: var(--gold);
   margin-bottom: 7px;
   display: block;
 }
@@ -434,7 +435,7 @@ html, body {
   flex-shrink: 0;
   width: 17px;
   height: 17px;
-  background: var(--primary);
+  background: var(--congress);
   color: white;
   border-radius: 50%;
   font-size: 9px;
@@ -456,13 +457,13 @@ html, body {
 }
 .references ol { padding-left: 15px; }
 .references li { margin-bottom: 3px; }
-.references a  { color: var(--secondary); text-decoration: none; }
+.references a  { color: var(--mid-blue); text-decoration: none; }
 
 /* ══════════════════════════════
    FOOTER
 ══════════════════════════════ */
 .poster-footer {
-  background: var(--primary);
+  background: var(--congress);
   color: rgba(255,255,255,.7);
   font-size: 8.5px;
   padding: 7px 22px;
@@ -470,6 +471,7 @@ html, body {
   justify-content: space-between;
   align-items: center;
   letter-spacing: .2px;
+  border-top: 3px solid var(--gold);
 }
 .poster-footer strong { color: #fff; }
 </style>
@@ -477,21 +479,18 @@ html, body {
 <body>
 <div class="poster">
 
-<!-- ═══════════════════════════════════
+<!-- ══════════════════════════════════
      HEADER
-═══════════════════════════════════ -->
+══════════════════════════════════ -->
 <header class="poster-header">
 
-  <!-- Logo — top left, per poster design guidelines -->
+  <!-- Logo — top left per poster guidelines -->
   <div class="header-logo">
-    <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="HCFMUSP IOT logo">
-      <!-- Shield outline -->
+    <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
       <path d="M32 3 L54 12 L54 36 Q54 54 32 62 Q10 54 10 36 L10 12 Z"
-            fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/>
-      <!-- Cross symbol -->
-      <line x1="32" y1="12" x2="32" y2="22" stroke="rgba(255,255,255,0.55)" stroke-width="2"/>
-      <line x1="27" y1="17" x2="37" y2="17" stroke="rgba(255,255,255,0.55)" stroke-width="2"/>
-      <!-- Text -->
+            fill="rgba(255,255,255,0.10)" stroke="rgba(200,150,12,0.7)" stroke-width="1.5"/>
+      <line x1="32" y1="12" x2="32" y2="22" stroke="rgba(200,150,12,0.8)" stroke-width="2"/>
+      <line x1="27" y1="17" x2="37" y2="17" stroke="rgba(200,150,12,0.8)" stroke-width="2"/>
       <text x="32" y="34" text-anchor="middle" fill="white"
             font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">HC</text>
       <text x="32" y="43" text-anchor="middle" fill="rgba(255,255,255,0.78)"
@@ -502,7 +501,6 @@ html, body {
     <span class="header-logo-text">S&atilde;o Paulo<br>Brazil</span>
   </div>
 
-  <!-- Title, authors, institution -->
   <div class="header-main">
     <h1 class="poster-title">Low Back Pain in an Orthopedic Pain Clinic: Diagnosis Challenges</h1>
     <p class="poster-authors">
@@ -519,7 +517,6 @@ html, body {
     </p>
   </div>
 
-  <!-- Study cohort stat -->
   <div class="header-stat">
     <span class="n-label">Study cohort</span>
     <span class="n-value">18</span>
@@ -527,22 +524,23 @@ html, body {
   </div>
 
 </header>
+<!-- Thai-inspired gradient bar: gold → coral → teal -->
 <div class="accent-bar"></div>
 
-<!-- ═══════════════════════════════════
+<!-- ══════════════════════════════════
      BODY — 3 columns
-═══════════════════════════════════ -->
+══════════════════════════════════ -->
 <main class="poster-body">
 
-  <!-- ── COLUMN 1: INTRODUCTION & METHODS ── -->
+  <!-- ── COLUMN 1 ── -->
   <div class="col">
 
     <div class="section-card">
       <div class="section-title">1. Introduction</div>
       <div class="section-body">
         <p>Low back pain (LBP) is the <strong>leading cause of years lived with disability (YLDs) globally</strong>, with an estimated 577 million prevalent cases and 64.9 million YLDs reported in 2017 — representing a 52.7% increase since 1990.<sup>3,4,5</sup> Approximately 90% of cases are classified as non-specific, lacking a clearly identifiable pathoanatomical cause.<sup>1,2</sup></p>
-        <p>Contemporary physiopathology of LBP operates within a <strong>biopsychosocial framework</strong> that integrates biological, psychological, and social determinants, superseding the traditional injury-based paradigm.<sup>1,2</sup> Under the current IASP taxonomy, LBP may manifest as nociceptive, neuropathic, nociplastic, or mixed pain, each requiring distinct therapeutic strategies.<sup>2</sup></p>
-        <p>Myofascial pain syndrome (MPS) — a primary nociceptive condition characterised by myofascial trigger points (MTrPs) — is frequently under-recognised as a co-occurring diagnosis in patients with LBP referred from surgical subspecialties.<sup>6,7</sup> Its identification has direct therapeutic implications, given that MPS management diverges substantially from structural or purely pharmacological approaches.</p>
+        <p>Contemporary physiopathology of LBP operates within a <strong>biopsychosocial framework</strong> integrating biological, psychological, and social determinants.<sup>1,2</sup> Under the current IASP taxonomy, LBP may manifest as nociceptive, neuropathic, nociplastic, or mixed pain, each requiring distinct therapeutic strategies.<sup>2</sup></p>
+        <p>Myofascial pain syndrome (MPS) — characterised by myofascial trigger points (MTrPs) — is frequently under-recognised as a co-occurring diagnosis in LBP patients referred from surgical subspecialties.<sup>6,7</sup> Its identification carries direct therapeutic implications.</p>
       </div>
     </div>
 
@@ -564,7 +562,7 @@ html, body {
           </div>
           <div class="method-row">
             <span class="method-label">Setting</span>
-            <span class="method-value">IPC, Institute of Orthopedics and Traumatology (IOT), HCFMUSP — quaternary-level public teaching hospital, S&atilde;o Paulo, Brazil</span>
+            <span class="method-value">IPC, IOT, HCFMUSP — quaternary-level public teaching hospital, S&atilde;o Paulo, Brazil</span>
           </div>
           <div class="method-row">
             <span class="method-label">Period</span>
@@ -572,15 +570,15 @@ html, body {
           </div>
           <div class="method-row">
             <span class="method-label">Population</span>
-            <span class="method-value">Consecutive patients referred from the Spinal Unit to the IPC with a primary diagnosis of chronic LBP</span>
+            <span class="method-value">Consecutive patients referred from the Spinal Unit to the IPC with chronic LBP</span>
           </div>
           <div class="method-row">
             <span class="method-label">Variables</span>
-            <span class="method-value">Sociodemographic data; pain duration; pain type (nociceptive / neuropathic / nociplastic / mixed); concurrent diagnoses; pharmacological history; sleep quality; physical activity; mood status</span>
+            <span class="method-value">Sociodemographic data; pain duration; pain type; concurrent diagnoses; pharmacological history; sleep; physical activity; mood</span>
           </div>
           <div class="method-row">
             <span class="method-label">Assessment</span>
-            <span class="method-value">Standardised comprehensive musculoskeletal and neurological examination by the interdisciplinary pain team in all patients</span>
+            <span class="method-value">Standardised comprehensive musculoskeletal and neurological examination by the interdisciplinary pain team</span>
           </div>
         </div>
       </div>
@@ -588,7 +586,7 @@ html, body {
 
   </div><!-- /col 1 -->
 
-  <!-- ── COLUMN 2: RESULTS ── -->
+  <!-- ── COLUMN 2 ── -->
   <div class="col">
 
     <div class="section-card">
@@ -597,10 +595,7 @@ html, body {
         <table class="data-table">
           <caption>Table 1. Demographic and clinical profile of the LBP cohort (n&nbsp;=&nbsp;18).</caption>
           <thead>
-            <tr>
-              <th>Variable</th>
-              <th style="text-align:right;">Value</th>
-            </tr>
+            <tr><th>Variable</th><th style="text-align:right;">Value</th></tr>
           </thead>
           <tbody>
             <tr><td>Sample size (n)</td><td>18</td></tr>
@@ -628,18 +623,14 @@ html, body {
         </div>
         <div class="seg-legend">
           <div class="seg-legend-item">
-            <div class="seg-dot" style="background:var(--secondary);"></div>
-            <div>
-              <strong>Nociceptive / Nociplastic (69%; n&nbsp;&asymp;&nbsp;12)</strong><br>
-              Musculoskeletal mechanism; no neuropathic component identified
-            </div>
+            <div class="seg-dot" style="background:var(--mid-blue);"></div>
+            <div><strong>Nociceptive / Nociplastic (69%; n&nbsp;&asymp;&nbsp;12)</strong><br>
+            Musculoskeletal mechanism; no neuropathic component</div>
           </div>
           <div class="seg-legend-item">
-            <div class="seg-dot" style="background:var(--accent);"></div>
-            <div>
-              <strong>Mixed musculoskeletal + neuropathic (31%; n&nbsp;&asymp;&nbsp;6)</strong><br>
-              Concurrent nociceptive/nociplastic and neuropathic components
-            </div>
+            <div class="seg-dot" style="background:var(--coral);"></div>
+            <div><strong>Mixed musculoskeletal + neuropathic (31%; n&nbsp;&asymp;&nbsp;6)</strong><br>
+            Concurrent nociceptive/nociplastic and neuropathic components</div>
           </div>
         </div>
         <div class="mps-highlight">
@@ -647,7 +638,7 @@ html, body {
           <strong>100% of patients (18/18)</strong>, confirming it as the
           primary musculoskeletal abnormality across both pain-mechanism subgroups.
         </div>
-        <p class="figure-caption"><strong>Figure 1.</strong> Distribution of pain mechanism subtypes among LBP patients evaluated at the Interdisciplinary Pain Clinic (n&nbsp;=&nbsp;18). MPS was present in all cases irrespective of primary pain type.</p>
+        <p class="figure-caption"><strong>Figure 1.</strong> Distribution of pain mechanism subtypes among LBP patients (n&nbsp;=&nbsp;18). MPS was present in all cases irrespective of primary pain type.</p>
       </div>
     </div>
 
@@ -656,35 +647,32 @@ html, body {
       <div class="figure-wrap">
         <div class="fig-title">Figure 2. Pharmacological treatments prior to pain clinic referral</div>
         <div class="hbar-chart">
-
           <div>
             <div class="hbar-label-row">
               <span class="hbar-label">Opioid analgesics</span>
               <span class="hbar-value">83.3%</span>
             </div>
             <div class="hbar-track">
-              <div class="hbar-fill" style="width:83.3%;background:var(--accent);">n&nbsp;=&nbsp;15</div>
+              <div class="hbar-fill" style="width:83.3%;background:var(--coral);">n&nbsp;=&nbsp;15</div>
             </div>
           </div>
-
           <div>
             <div class="hbar-label-row">
               <span class="hbar-label">Anticonvulsants (adjuvant analgesics)</span>
               <span class="hbar-value">50.0%</span>
             </div>
             <div class="hbar-track">
-              <div class="hbar-fill" style="width:50%;background:var(--purple);">n&nbsp;=&nbsp;9</div>
+              <div class="hbar-fill" style="width:50%;background:var(--congress);">n&nbsp;=&nbsp;9</div>
             </div>
           </div>
-
         </div>
-        <p class="figure-caption"><strong>Figure 2.</strong> Proportion of patients using pharmacological agents prior to first pain clinic consultation. Opioid use sub-classification comprised predominantly weak opioids.</p>
+        <p class="figure-caption"><strong>Figure 2.</strong> Proportion of patients using pharmacological agents prior to first pain clinic consultation.</p>
       </div>
     </div>
 
   </div><!-- /col 2 -->
 
-  <!-- ── COLUMN 3: RESULTS (cont.) + CONCLUSIONS + REFERENCES ── -->
+  <!-- ── COLUMN 3 ── -->
   <div class="col">
 
     <div class="section-card">
@@ -692,58 +680,54 @@ html, body {
       <div class="figure-wrap">
         <div class="fig-title">Figure 3. Biopsychosocial burden at pain clinic intake</div>
         <div class="hbar-chart">
-
           <div>
             <div class="hbar-label-row">
               <span class="hbar-label">Mood impairment</span>
               <span class="hbar-value">100%</span>
             </div>
             <div class="hbar-track">
-              <div class="hbar-fill" style="width:100%;background:var(--secondary);">18/18</div>
+              <div class="hbar-fill" style="width:100%;background:var(--mid-blue);">18/18</div>
             </div>
           </div>
-
           <div>
             <div class="hbar-label-row">
               <span class="hbar-label">Physical inactivity</span>
               <span class="hbar-value">77.8%</span>
             </div>
             <div class="hbar-track">
-              <div class="hbar-fill" style="width:77.8%;background:var(--accent);">n&nbsp;&asymp;&nbsp;14</div>
+              <div class="hbar-fill" style="width:77.8%;background:var(--coral);">n&nbsp;&asymp;&nbsp;14</div>
             </div>
           </div>
-
           <div>
             <div class="hbar-label-row">
               <span class="hbar-label">Non-restorative sleep</span>
               <span class="hbar-value">75.0%</span>
             </div>
             <div class="hbar-track">
-              <div class="hbar-fill" style="width:75%;background:var(--purple);">n&nbsp;&asymp;&nbsp;14</div>
+              <div class="hbar-fill" style="width:75%;background:var(--congress);">n&nbsp;&asymp;&nbsp;14</div>
             </div>
           </div>
-
           <div>
             <div class="hbar-label-row">
               <span class="hbar-label">Prior lumbar surgery</span>
               <span class="hbar-value">38.9%</span>
             </div>
             <div class="hbar-track">
-              <div class="hbar-fill" style="width:38.9%;background:var(--green);">n&nbsp;=&nbsp;7</div>
+              <div class="hbar-fill" style="width:38.9%;background:var(--teal);">n&nbsp;=&nbsp;7</div>
             </div>
           </div>
-
         </div>
-        <p class="figure-caption"><strong>Figure 3.</strong> Prevalence of biopsychosocial factors identified at intake assessment. All patients (100%) presented clinically significant mood impairment.</p>
+        <p class="figure-caption"><strong>Figure 3.</strong> Prevalence of biopsychosocial factors at intake. All patients (100%) presented clinically significant mood impairment.</p>
       </div>
     </div>
 
     <div class="key-finding">
-      <span class="key-finding-title">Key Finding</span>
-      The convergence of universal MPS (100%), near-universal mood impairment (100%),
-      physical inactivity (77.8%), non-restorative sleep (75.0%), and high opioid burden (83.3%)
-      confirms the profound <em>biopsychosocial complexity</em> of chronic LBP in this
-      quaternary orthopedic referral population, and underscores the inadequacy of
+      <span class="key-finding-title">&#9733; Key Finding</span>
+      The convergence of universal MPS (100%), mood impairment (100%),
+      physical inactivity (77.8%), non-restorative sleep (75.0%), and
+      high opioid burden (83.3%) confirms the profound
+      <em>biopsychosocial complexity</em> of chronic LBP in this quaternary
+      orthopedic referral population, and underscores the inadequacy of
       single-mechanism pharmacological approaches.
     </div>
 
@@ -756,19 +740,19 @@ html, body {
         </li>
         <li>
           <span class="concl-num">2</span>
-          <span>MPS was identified in all evaluated patients (100%), constituting the <strong>primary musculoskeletal abnormality</strong> regardless of overall pain type.</span>
+          <span>MPS was identified in all patients (100%), constituting the <strong>primary musculoskeletal abnormality</strong> regardless of overall pain type.</span>
         </li>
         <li>
           <span class="concl-num">3</span>
-          <span>Nociceptive and nociplastic mechanisms predominated (69%), with mixed musculoskeletal-neuropathic pain accounting for 31% of cases.</span>
+          <span>Nociceptive/nociplastic mechanisms predominated (69%), with mixed pain in 31%.</span>
         </li>
         <li>
           <span class="concl-num">4</span>
-          <span>Opioid use prior to pain clinic referral (83.3%) indicates <strong>treatment mismatch</strong> relative to the predominant musculoskeletal pain mechanism.</span>
+          <span>Opioid use prior to referral (83.3%) indicates <strong>treatment mismatch</strong> relative to the predominant musculoskeletal mechanism.</span>
         </li>
         <li>
           <span class="concl-num">5</span>
-          <span>The biopsychosocial burden observed reinforces the imperative for a <strong>multidisciplinary, mechanism-oriented therapeutic approach</strong> in this population.</span>
+          <span>Biopsychosocial burden reinforces the need for a <strong>multidisciplinary, mechanism-oriented</strong> therapeutic approach.</span>
         </li>
       </ul>
     </div>
@@ -777,12 +761,12 @@ html, body {
       <div class="section-title">References</div>
       <div class="references">
         <ol>
-          <li>King W, Bogduk N. Chronic low back pain. In: Loeser JD, Butler SH, Chapman CR, Turk DC, eds. <em>Bonica's Management of Pain</em>. 5th ed. Wolters Kluwer; 2019.</li>
+          <li>King W, Bogduk N. Chronic low back pain. In: <em>Bonica's Management of Pain</em>. 5th ed. Wolters Kluwer; 2019.</li>
           <li>Vlaeyen JWS, Maher CG, Wiech K, et al. Low back pain. <em>Nat Rev Dis Primers</em>. 2018;4:52. <a href="https://doi.org/10.1038/s41572-018-0052-1">doi:10.1038/s41572-018-0052-1</a></li>
           <li>Hartvigsen J, Hancock MJ, Kongsted A, et al. What low back pain is and why we need to pay attention. <em>Lancet</em>. 2018;391(10137):2356–2367. <a href="https://doi.org/10.1016/S0140-6736(18)30480-X">doi:10.1016/S0140-6736(18)30480-X</a></li>
-          <li>GBD 2017 Disease and Injury Incidence and Prevalence Collaborators. Global, regional, and national incidence, prevalence, and years lived with disability for 354 diseases and injuries. <em>Lancet</em>. 2018;392(10159):1789–1858. <a href="https://doi.org/10.1016/S0140-6736(18)32279-7">doi:10.1016/S0140-6736(18)32279-7</a></li>
-          <li>Wu A, March L, Zheng X, et al. Global low back pain prevalence and years lived with disability from 1990 to 2017. <em>Ann Transl Med</em>. 2020;8(6):299. <a href="https://doi.org/10.21037/atm.2020.02.175">doi:10.21037/atm.2020.02.175</a></li>
-          <li>Fern&aacute;ndez-de-Las-Pe&ntilde;as C, Nijs J, Cagnie B, et al. Myofascial pain syndrome: a nociceptive condition comorbid with neuropathic or nociplastic pain. <em>Life (Basel)</em>. 2023;13(3):694. <a href="https://doi.org/10.3390/life13030694">doi:10.3390/life13030694</a></li>
+          <li>GBD 2017 Collaborators. Global incidence, prevalence, and YLDs for 354 diseases and injuries. <em>Lancet</em>. 2018;392(10159):1789–1858. <a href="https://doi.org/10.1016/S0140-6736(18)32279-7">doi:10.1016/S0140-6736(18)32279-7</a></li>
+          <li>Wu A, March L, Zheng X, et al. Global LBP prevalence and YLDs 1990–2017. <em>Ann Transl Med</em>. 2020;8(6):299. <a href="https://doi.org/10.21037/atm.2020.02.175">doi:10.21037/atm.2020.02.175</a></li>
+          <li>Fern&aacute;ndez-de-Las-Pe&ntilde;as C, Nijs J, Cagnie B, et al. MPS: a nociceptive condition comorbid with neuropathic or nociplastic pain. <em>Life (Basel)</em>. 2023;13(3):694. <a href="https://doi.org/10.3390/life13030694">doi:10.3390/life13030694</a></li>
           <li>Fitzcharles MA, Cohen SP, Clauw DJ, et al. Chronic primary musculoskeletal pain. <em>Pain Rep</em>. 2022;7(5):e1024. <a href="https://doi.org/10.1097/PR9.0000000000001024">doi:10.1097/PR9.0000000000001024</a></li>
         </ol>
         <p style="margin-top:5px;font-style:italic;">References retrieved via PubMed (pubmed.ncbi.nlm.nih.gov).</p>
@@ -793,11 +777,11 @@ html, body {
 
 </main>
 
-<!-- ═══════════════════════════════════
+<!-- ══════════════════════════════════
      FOOTER
-═══════════════════════════════════ -->
+══════════════════════════════════ -->
 <footer class="poster-footer">
-  <span>Retrospective observational study &bull; IOT &ndash; HCFMUSP &bull; S&atilde;o Paulo, Brazil &bull; 2025</span>
+  <span>IASP World Congress on Pain 2026 &bull; Bangkok, Thailand &bull; IOT &ndash; HCFMUSP &bull; S&atilde;o Paulo, Brazil</span>
   <span><strong>Correspondence:</strong> yeng.lt@hc.fm.usp.br</span>
   <span>MPS&nbsp;=&nbsp;myofascial pain syndrome &bull; LBP&nbsp;=&nbsp;low back pain &bull; IPC&nbsp;=&nbsp;interdisciplinary pain clinic &bull; IASP&nbsp;=&nbsp;International Association for the Study of Pain</span>
 </footer>
