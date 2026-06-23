@@ -5,34 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Poster 1 – Low Back Pain in an Orthopedic Pain Clinic: Diagnosis Challenges</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap');
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --navy:    #0B2549;
-  --blue:    #1A4A8A;
-  --light-blue: #D6E4F7;
-  --red:     #B71C1C;
-  --red-light: #FDECEA;
-  --bg:      #F4F7FB;
-  --white:   #FFFFFF;
-  --text:    #111827;
-  --muted:   #4B5563;
-  --border:  #CBD5E1;
-  --chart1:  #1A4A8A;
-  --chart2:  #B71C1C;
-  --chart3:  #2E7D32;
-  --chart4:  #6A1A8A;
+  --primary:   #0B2549;
+  --secondary: #1A4A8A;
+  --light:     #D6E4F7;
+  --accent:    #B71C1C;
+  --green:     #2E7D32;
+  --purple:    #6A1A8A;
+  --bg:        #EDF2F7;
+  --white:     #FFFFFF;
+  --text:      #1A1A1A;
+  --muted:     #4B5563;
+  --border:    #C5D0DE;
 }
 
+/* Single font family throughout (per PDF guidelines) */
 html, body {
   width: 1122px;
-  background: #888;
-  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-  font-size: 13px;
+  background: #777;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
   color: var(--text);
-  line-height: 1.55;
+  line-height: 1.8; /* double spacing per PDF */
 }
 
 .poster {
@@ -44,46 +40,63 @@ html, body {
   box-shadow: 0 6px 32px rgba(0,0,0,.4);
 }
 
-/* ══════════════════════════════════════════
-   HEADER
-══════════════════════════════════════════ */
+/* ══════════════════════════════
+   HEADER — logo | title area | stat
+══════════════════════════════ */
 .poster-header {
-  background: var(--navy);
-  color: var(--white);
-  padding: 0;
+  background: var(--primary);
+  color: #fff;
   display: grid;
-  grid-template-columns: 1fr 138px;
+  grid-template-columns: 98px 1fr 128px;
+}
+
+/* Logo column — left, per PDF recommendation */
+.header-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 10px;
+  border-right: 1px solid rgba(255,255,255,.18);
+  gap: 6px;
+}
+
+.header-logo-text {
+  font-size: 7px;
+  color: rgba(255,255,255,.55);
+  text-align: center;
+  letter-spacing: .5px;
+  line-height: 1.4;
+  text-transform: uppercase;
 }
 
 .header-main {
-  padding: 26px 30px 22px 30px;
-  border-right: 1px solid rgba(255,255,255,.15);
+  padding: 20px 24px 17px;
 }
 
+/* Title: equivalent to 96pt at print scale */
 .poster-title {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 25px;
-  font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: -0.3px;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1.22;
   margin-bottom: 10px;
-  color: var(--white);
+  color: #fff;
 }
 
+/* Authors: equivalent to 48–72pt at print scale */
 .poster-authors {
   font-size: 10.5px;
   color: rgba(255,255,255,.88);
-  line-height: 1.6;
-  margin-bottom: 7px;
-  font-weight: 400;
+  line-height: 1.7;
+  margin-bottom: 6px;
 }
 
+/* Institution: equivalent to 36–48pt at print scale */
 .poster-institution {
-  font-family: 'Source Serif 4', Georgia, serif;
-  font-style: italic;
   font-size: 10px;
-  color: rgba(255,255,255,.75);
-  line-height: 1.4;
+  font-style: italic;
+  color: rgba(255,255,255,.72);
+  line-height: 1.55;
 }
 
 .header-stat {
@@ -93,180 +106,176 @@ html, body {
   justify-content: center;
   padding: 18px 10px;
   background: rgba(255,255,255,.06);
+  border-left: 1px solid rgba(255,255,255,.15);
   text-align: center;
 }
 
 .header-stat .n-label {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 9.5px;
-  font-weight: 600;
+  font-size: 9px;
+  font-weight: bold;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(255,255,255,.65);
-  margin-bottom: 6px;
+  color: rgba(255,255,255,.6);
+  margin-bottom: 5px;
 }
 
 .header-stat .n-value {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 54px;
-  font-weight: 800;
-  color: #FFFFFF;
+  font-size: 52px;
+  font-weight: bold;
+  color: #fff;
   line-height: 1;
   display: block;
 }
 
 .header-stat .n-desc {
   font-size: 10px;
-  color: rgba(255,255,255,.65);
-  margin-top: 5px;
+  color: rgba(255,255,255,.6);
+  margin-top: 4px;
   line-height: 1.3;
 }
 
 .accent-bar {
-  height: 6px;
-  background: linear-gradient(90deg, var(--red) 0%, #E53935 40%, #1565C0 70%, var(--navy) 100%);
+  height: 5px;
+  background: linear-gradient(90deg, var(--accent) 0%, #E53935 35%, #1565C0 65%, var(--primary) 100%);
 }
 
-/* ══════════════════════════════════════════
-   BODY
-══════════════════════════════════════════ */
+/* ══════════════════════════════
+   BODY — 3 columns
+══════════════════════════════ */
 .poster-body {
   flex: 1;
   display: grid;
   grid-template-columns: 344px 400px 344px;
-  gap: 0;
 }
 
 .col {
-  padding: 16px 14px;
+  padding: 14px 12px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 11px;
 }
 
 .col:nth-child(2) {
-  background: rgba(255,255,255,.35);
+  background: rgba(255,255,255,.32);
   border-left: 1.5px solid var(--border);
   border-right: 1.5px solid var(--border);
 }
 
-/* ══════════════════════════════════════════
+/* ══════════════════════════════
    SECTION CARDS
-══════════════════════════════════════════ */
+══════════════════════════════ */
 .section-card {
   background: var(--white);
-  border-radius: 6px;
   border: 1px solid var(--border);
+  border-radius: 5px;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  box-shadow: 0 1px 3px rgba(0,0,0,.05);
 }
 
+/* Section headers: equivalent to 36pt bold at print scale */
 .section-title {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 9.5px;
-  font-weight: 700;
+  font-size: 10px;
+  font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1.4px;
-  color: var(--white);
-  background: var(--navy);
-  padding: 6px 13px;
+  color: #fff;
+  background: var(--primary);
+  padding: 6px 12px;
 }
 
-.section-title.accent-red { background: var(--red); }
-.section-title.accent-blue { background: var(--blue); }
+.section-title.blue   { background: var(--secondary); }
+.section-title.red    { background: var(--accent); }
+.section-title.green  { background: var(--green); }
 
+/* Body: minimum 24pt equivalent; double-spaced; justified */
 .section-body {
-  padding: 11px 13px;
-  font-size: 12px;
-  line-height: 1.6;
+  padding: 11px 12px;
+  font-size: 11.5px;
+  line-height: 1.8;
   color: var(--text);
+  text-align: justify;
 }
 
-.section-body p + p { margin-top: 8px; }
+.section-body p + p { margin-top: 7px; }
+.section-body sup { font-size: 9px; color: var(--secondary); font-weight: bold; }
 
-.section-body sup {
-  font-size: 9px;
-  color: var(--blue);
-  font-weight: 600;
-}
-
-/* ══════════════════════════════════════════
-   TABLE
-══════════════════════════════════════════ */
+/* ══════════════════════════════
+   TABLE 1
+══════════════════════════════ */
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 11.5px;
+  font-size: 11px;
 }
 
 .data-table caption {
   caption-side: bottom;
-  font-size: 10px;
+  font-size: 9.5px;
   color: var(--muted);
   font-style: italic;
   text-align: left;
   padding: 5px 0 2px;
+  line-height: 1.5;
 }
 
 .data-table thead th {
-  background: var(--light-blue);
-  color: var(--navy);
-  font-family: 'Montserrat', sans-serif;
+  background: var(--light);
+  color: var(--primary);
   font-size: 9.5px;
-  font-weight: 700;
+  font-weight: bold;
   text-transform: uppercase;
-  letter-spacing: .8px;
+  letter-spacing: .7px;
   padding: 6px 10px;
   text-align: left;
-  border-bottom: 2px solid var(--navy);
+  border-bottom: 2px solid var(--primary);
 }
 
 .data-table thead th:last-child { text-align: right; }
-
-.data-table tbody tr:nth-child(even) td { background: #F8FAFD; }
+.data-table tbody tr:nth-child(even) td { background: #F6F9FD; }
 
 .data-table tbody td {
-  padding: 6px 10px;
-  border-bottom: 1px solid #E5EAF2;
-  color: var(--text);
+  padding: 5px 10px;
+  border-bottom: 1px solid #E4ECF4;
   vertical-align: middle;
+  line-height: 1.5;
 }
 
 .data-table tbody td:last-child {
   text-align: right;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  color: var(--blue);
+  font-weight: bold;
+  color: var(--secondary);
   white-space: nowrap;
 }
 
 .data-table tbody tr:last-child td { border-bottom: none; }
 
-/* ══════════════════════════════════════════
-   CHARTS  (SVG-based, described in markup)
-══════════════════════════════════════════ */
-.figure-wrap {
-  padding: 12px 13px 10px;
-}
-
-.figure-wrap + .figure-wrap {
-  border-top: 1px dashed var(--border);
-}
+/* ══════════════════════════════
+   FIGURES / CHARTS
+══════════════════════════════ */
+.figure-wrap { padding: 11px 12px 10px; }
+.figure-wrap + .figure-wrap { border-top: 1px dashed var(--border); }
 
 .figure-caption {
-  font-size: 10px;
+  font-size: 9.5px;
   color: var(--muted);
   font-style: italic;
   margin-top: 6px;
-  line-height: 1.4;
+  line-height: 1.55;
+  text-align: left;
 }
-
 .figure-caption strong { font-style: normal; color: var(--text); }
 
-/* Horizontal bar chart rows */
-.hbar-chart { display: flex; flex-direction: column; gap: 10px; }
+.fig-title {
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--primary);
+  margin-bottom: 9px;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+}
 
-.hbar-row {}
+/* Horizontal bar chart */
+.hbar-chart { display: flex; flex-direction: column; gap: 9px; }
 
 .hbar-label-row {
   display: flex;
@@ -275,26 +284,10 @@ html, body {
   margin-bottom: 3px;
 }
 
-.hbar-label {
-  font-size: 11px;
-  color: var(--text);
-  font-weight: 500;
-}
+.hbar-label  { font-size: 11px; color: var(--text); }
+.hbar-value  { font-size: 12px; font-weight: bold; color: var(--primary); }
 
-.hbar-value {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--navy);
-}
-
-.hbar-track {
-  background: #EEF2F9;
-  border-radius: 3px;
-  height: 16px;
-  width: 100%;
-  position: relative;
-}
+.hbar-track  { background: #EEF2F9; border-radius: 3px; height: 16px; width: 100%; }
 
 .hbar-fill {
   height: 100%;
@@ -302,220 +295,59 @@ html, body {
   display: flex;
   align-items: center;
   padding-left: 6px;
-}
-
-.hbar-fill-label {
   font-size: 9.5px;
-  font-weight: 700;
+  font-weight: bold;
   color: white;
 }
 
-.hbar-n {
-  font-size: 10px;
-  color: var(--muted);
-  margin-top: 1px;
-}
-
-/* ══════════════════════════════════════════
-   KEY FINDING
-══════════════════════════════════════════ */
-.key-finding {
-  background: var(--navy);
-  color: var(--white);
-  border-radius: 6px;
-  padding: 14px 15px;
-  font-size: 12.5px;
-  line-height: 1.6;
-}
-
-.key-finding-title {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 9.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.4px;
-  color: #FDD835;
-  margin-bottom: 8px;
-  display: block;
-}
-
-/* ══════════════════════════════════════════
-   CONCLUSIONS
-══════════════════════════════════════════ */
-.concl-list {
-  list-style: none;
-  padding: 11px 13px 13px;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.concl-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  font-size: 11.5px;
-  line-height: 1.55;
-  color: var(--text);
-}
-
-.concl-num {
-  flex-shrink: 0;
-  width: 18px;
-  height: 18px;
-  background: var(--navy);
-  color: white;
-  border-radius: 50%;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 9.5px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1px;
-}
-
-/* ══════════════════════════════════════════
-   REFERENCES
-══════════════════════════════════════════ */
-.references {
-  font-size: 9px;
-  color: var(--muted);
-  line-height: 1.55;
-  padding: 9px 13px 13px;
-}
-
-.references ol {
-  padding-left: 16px;
-}
-
-.references li {
-  margin-bottom: 3px;
-}
-
-.references a {
-  color: var(--blue);
-  text-decoration: none;
-}
-
-/* ══════════════════════════════════════════
-   DIVIDER
-══════════════════════════════════════════ */
-.divider {
-  height: 1px;
-  background: var(--border);
-  margin: 0 13px;
-}
-
-/* ══════════════════════════════════════════
-   FOOTER
-══════════════════════════════════════════ */
-.poster-footer {
-  background: var(--navy);
-  color: rgba(255,255,255,.7);
-  font-size: 9px;
-  padding: 7px 28px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  letter-spacing: .2px;
-}
-
-.poster-footer strong { color: var(--white); }
-
-/* ══════════════════════════════════════════
-   INLINE METHOD LIST
-══════════════════════════════════════════ */
-.method-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  font-size: 11.5px;
-}
-
-.method-row {
-  display: grid;
-  grid-template-columns: 90px 1fr;
-  gap: 6px;
-  align-items: start;
-}
-
-.method-label {
-  font-weight: 600;
-  color: var(--navy);
-  font-size: 10.5px;
-  text-align: right;
-  padding-top: 1px;
-}
-
-.method-value {
-  color: var(--text);
-  line-height: 1.5;
-}
-
-/* Two-segment stacked bar */
-.seg-bar-wrap { padding: 12px 13px 10px; }
-
-.seg-bar-title {
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--navy);
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: .8px;
-}
+/* Segmented bar (pain classification) */
+.seg-bar-wrap { padding: 11px 12px 10px; }
 
 .seg-bar {
-  height: 36px;
+  height: 34px;
   border-radius: 4px;
   overflow: hidden;
   display: flex;
   width: 100%;
-  margin-bottom: 8px;
+  margin-bottom: 9px;
 }
 
 .seg-a {
-  background: var(--chart1);
+  background: var(--secondary);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Montserrat', sans-serif;
   font-size: 14px;
-  font-weight: 800;
+  font-weight: bold;
   color: white;
   flex: 69;
 }
 
 .seg-b {
-  background: var(--chart2);
+  background: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Montserrat', sans-serif;
   font-size: 14px;
-  font-weight: 800;
+  font-weight: bold;
   color: white;
   flex: 31;
   border-left: 2px solid white;
 }
 
-.seg-legend {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
+.seg-legend { display: flex; flex-direction: column; gap: 5px; }
 
 .seg-legend-item {
   display: flex;
   align-items: flex-start;
   gap: 7px;
   font-size: 11px;
-  line-height: 1.4;
+  line-height: 1.55;
 }
 
 .seg-dot {
-  width: 11px;
-  height: 11px;
+  width: 10px;
+  height: 10px;
   border-radius: 2px;
   flex-shrink: 0;
   margin-top: 2px;
@@ -523,25 +355,154 @@ html, body {
 
 .mps-highlight {
   background: #E8F5E9;
-  border: 1.5px solid var(--chart3);
+  border: 1.5px solid var(--green);
   border-radius: 5px;
   padding: 8px 10px;
   margin-top: 8px;
   font-size: 11.5px;
-  line-height: 1.5;
+  line-height: 1.7;
   color: var(--text);
+  text-align: justify;
+}
+.mps-highlight strong { color: var(--green); }
+
+/* Methods grid */
+.method-grid { display: flex; flex-direction: column; gap: 5px; font-size: 11px; }
+
+.method-row {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 6px;
+  align-items: start;
 }
 
-.mps-highlight strong { color: var(--chart3); }
+.method-label {
+  font-weight: bold;
+  color: var(--primary);
+  font-size: 10px;
+  text-align: right;
+  padding-top: 1px;
+}
+
+.method-value { color: var(--text); line-height: 1.55; }
+
+/* ══════════════════════════════
+   KEY FINDING
+══════════════════════════════ */
+.key-finding {
+  background: var(--primary);
+  color: #fff;
+  border-radius: 5px;
+  padding: 13px 14px;
+  font-size: 12px;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.key-finding-title {
+  font-size: 9px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: #FDD835;
+  margin-bottom: 7px;
+  display: block;
+}
+
+/* ══════════════════════════════
+   CONCLUSIONS
+══════════════════════════════ */
+.concl-list {
+  list-style: none;
+  padding: 11px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.concl-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--text);
+  text-align: justify;
+}
+
+.concl-num {
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  font-size: 9px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+/* ══════════════════════════════
+   REFERENCES
+══════════════════════════════ */
+.references {
+  font-size: 9px;
+  color: var(--muted);
+  line-height: 1.55;
+  padding: 8px 12px 12px;
+}
+.references ol { padding-left: 15px; }
+.references li { margin-bottom: 3px; }
+.references a  { color: var(--secondary); text-decoration: none; }
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+.poster-footer {
+  background: var(--primary);
+  color: rgba(255,255,255,.7);
+  font-size: 8.5px;
+  padding: 7px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  letter-spacing: .2px;
+}
+.poster-footer strong { color: #fff; }
 </style>
 </head>
 <body>
 <div class="poster">
 
-<!-- ═══════════════════════════════════════
+<!-- ═══════════════════════════════════
      HEADER
-═══════════════════════════════════════ -->
+═══════════════════════════════════ -->
 <header class="poster-header">
+
+  <!-- Logo — top left, per poster design guidelines -->
+  <div class="header-logo">
+    <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="HCFMUSP IOT logo">
+      <!-- Shield outline -->
+      <path d="M32 3 L54 12 L54 36 Q54 54 32 62 Q10 54 10 36 L10 12 Z"
+            fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/>
+      <!-- Cross symbol -->
+      <line x1="32" y1="12" x2="32" y2="22" stroke="rgba(255,255,255,0.55)" stroke-width="2"/>
+      <line x1="27" y1="17" x2="37" y2="17" stroke="rgba(255,255,255,0.55)" stroke-width="2"/>
+      <!-- Text -->
+      <text x="32" y="34" text-anchor="middle" fill="white"
+            font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">HC</text>
+      <text x="32" y="43" text-anchor="middle" fill="rgba(255,255,255,0.78)"
+            font-family="Arial,Helvetica,sans-serif" font-size="7">FMUSP</text>
+      <text x="32" y="52" text-anchor="middle" fill="rgba(255,255,255,0.78)"
+            font-family="Arial,Helvetica,sans-serif" font-size="7">IOT</text>
+    </svg>
+    <span class="header-logo-text">S&atilde;o Paulo<br>Brazil</span>
+  </div>
+
+  <!-- Title, authors, institution -->
   <div class="header-main">
     <h1 class="poster-title">Low Back Pain in an Orthopedic Pain Clinic: Diagnosis Challenges</h1>
     <p class="poster-authors">
@@ -551,33 +512,37 @@ html, body {
       Teixeira MJ &bull; <strong>Yeng LT</strong>
     </p>
     <p class="poster-institution">
-      Interdisciplinary Pain Clinic &ndash; Spinal Unit &bull; Institute of Orthopedics and Traumatology (IOT) &bull;
+      Interdisciplinary Pain Clinic &ndash; Spinal Unit &bull;
+      Institute of Orthopedics and Traumatology (IOT) &bull;
       Hospital das Cl&iacute;nicas, Faculdade de Medicina, Universidade de S&atilde;o Paulo (HCFMUSP) &bull;
       S&atilde;o Paulo, Brazil
     </p>
   </div>
+
+  <!-- Study cohort stat -->
   <div class="header-stat">
     <span class="n-label">Study cohort</span>
     <span class="n-value">18</span>
     <span class="n-desc">Patients<br>evaluated</span>
   </div>
+
 </header>
 <div class="accent-bar"></div>
 
-<!-- ═══════════════════════════════════════
-     BODY
-═══════════════════════════════════════ -->
+<!-- ═══════════════════════════════════
+     BODY — 3 columns
+═══════════════════════════════════ -->
 <main class="poster-body">
 
-  <!-- ══ COLUMN 1: INTRODUCTION & METHODS ══ -->
+  <!-- ── COLUMN 1: INTRODUCTION & METHODS ── -->
   <div class="col">
 
     <div class="section-card">
       <div class="section-title">1. Introduction</div>
       <div class="section-body">
-        <p>Low back pain (LBP) is the <strong>leading cause of years lived with disability (YLDs) globally</strong>, with an estimated 577 million prevalent cases and 64.9 million YLDs reported in 2017 &mdash; representing a 52.7% increase since 1990.<sup>3,4,5</sup> Approximately 90% of cases are classified as non-specific, lacking a clearly identifiable pathoanatomical cause.<sup>1,2</sup></p>
-        <p>Contemporary physiopathology of LBP operates within a <strong>biopsychosocial framework</strong> that integrates biological, psychological, and social determinants, superseding the traditional injury-based paradigm.<sup>1,2</sup> Under the current International Association for the Study of Pain (IASP) taxonomy, LBP may manifest as nociceptive, neuropathic, nociplastic, or mixed pain, with each mechanism requiring distinct therapeutic strategies.<sup>2</sup></p>
-        <p>Myofascial pain syndrome (MPS) &mdash; a primary nociceptive condition characterised by myofascial trigger points (MTrPs) &mdash; is frequently under-recognised as a co-occurring diagnosis in patients with LBP referred from surgical subspecialties.<sup>6,7</sup> Its identification has direct therapeutic implications, given that MPS management diverges substantially from structural or purely pharmacological approaches.</p>
+        <p>Low back pain (LBP) is the <strong>leading cause of years lived with disability (YLDs) globally</strong>, with an estimated 577 million prevalent cases and 64.9 million YLDs reported in 2017 — representing a 52.7% increase since 1990.<sup>3,4,5</sup> Approximately 90% of cases are classified as non-specific, lacking a clearly identifiable pathoanatomical cause.<sup>1,2</sup></p>
+        <p>Contemporary physiopathology of LBP operates within a <strong>biopsychosocial framework</strong> that integrates biological, psychological, and social determinants, superseding the traditional injury-based paradigm.<sup>1,2</sup> Under the current IASP taxonomy, LBP may manifest as nociceptive, neuropathic, nociplastic, or mixed pain, each requiring distinct therapeutic strategies.<sup>2</sup></p>
+        <p>Myofascial pain syndrome (MPS) — a primary nociceptive condition characterised by myofascial trigger points (MTrPs) — is frequently under-recognised as a co-occurring diagnosis in patients with LBP referred from surgical subspecialties.<sup>6,7</sup> Its identification has direct therapeutic implications, given that MPS management diverges substantially from structural or purely pharmacological approaches.</p>
       </div>
     </div>
 
@@ -585,7 +550,7 @@ html, body {
       <div class="section-title">2. Objectives</div>
       <div class="section-body">
         <p>To characterise the <strong>clinical and diagnostic profile</strong> of patients with chronic LBP referred from the Spinal Unit to an Interdisciplinary Pain Clinic (IPC), with emphasis on:</p>
-        <p>(i) pain mechanism classification (nociceptive, nociplastic, neuropathic, and mixed); (ii) prevalence and role of MPS; (iii) prior pharmacological treatment patterns; and (iv) biopsychosocial comorbidities.</p>
+        <p>(i) pain mechanism classification (nociceptive, nociplastic, neuropathic, mixed); (ii) prevalence and role of MPS; (iii) prior pharmacological treatment patterns; and (iv) biopsychosocial comorbidities.</p>
       </div>
     </div>
 
@@ -599,11 +564,11 @@ html, body {
           </div>
           <div class="method-row">
             <span class="method-label">Setting</span>
-            <span class="method-value">IPC, Institute of Orthopedics and Traumatology (IOT), HCFMUSP &mdash; a quaternary-level public teaching hospital, S&atilde;o Paulo, Brazil</span>
+            <span class="method-value">IPC, Institute of Orthopedics and Traumatology (IOT), HCFMUSP — quaternary-level public teaching hospital, S&atilde;o Paulo, Brazil</span>
           </div>
           <div class="method-row">
             <span class="method-label">Period</span>
-            <span class="method-value">January&ndash;December 2025</span>
+            <span class="method-value">January–December 2025</span>
           </div>
           <div class="method-row">
             <span class="method-label">Population</span>
@@ -611,7 +576,7 @@ html, body {
           </div>
           <div class="method-row">
             <span class="method-label">Variables</span>
-            <span class="method-value">Sociodemographic data; pain duration (months); pain type (nociceptive/neuropathic/nociplastic/mixed); concurrent diagnoses; pharmacological history (opioids, anticonvulsants, antidepressants); sleep quality; self-reported physical activity; mood status</span>
+            <span class="method-value">Sociodemographic data; pain duration; pain type (nociceptive / neuropathic / nociplastic / mixed); concurrent diagnoses; pharmacological history; sleep quality; physical activity; mood status</span>
           </div>
           <div class="method-row">
             <span class="method-label">Assessment</span>
@@ -623,12 +588,12 @@ html, body {
 
   </div><!-- /col 1 -->
 
-  <!-- ══ COLUMN 2: RESULTS ══ -->
+  <!-- ── COLUMN 2: RESULTS ── -->
   <div class="col">
 
     <div class="section-card">
-      <div class="section-title accent-blue">4. Results &mdash; Sample Characteristics</div>
-      <div style="padding:11px 13px 13px;">
+      <div class="section-title blue">4. Results — Sample Characteristics</div>
+      <div style="padding:11px 12px 13px;">
         <table class="data-table">
           <caption>Table 1. Demographic and clinical profile of the LBP cohort (n&nbsp;=&nbsp;18).</caption>
           <thead>
@@ -654,128 +619,117 @@ html, body {
     </div>
 
     <div class="section-card">
-      <div class="section-title accent-blue">4. Results &mdash; Pain Mechanism Classification</div>
-
+      <div class="section-title blue">4. Results — Pain Mechanism Classification</div>
       <div class="seg-bar-wrap">
-        <div class="seg-bar-title">Figure 1. Distribution of pain mechanisms (n&nbsp;=&nbsp;18)</div>
+        <div class="fig-title">Figure 1. Distribution of pain mechanisms (n&nbsp;=&nbsp;18)</div>
         <div class="seg-bar">
           <div class="seg-a">69%</div>
           <div class="seg-b">31%</div>
         </div>
         <div class="seg-legend">
           <div class="seg-legend-item">
-            <div class="seg-dot" style="background:var(--chart1);"></div>
+            <div class="seg-dot" style="background:var(--secondary);"></div>
             <div>
               <strong>Nociceptive / Nociplastic (69%; n&nbsp;&asymp;&nbsp;12)</strong><br>
               Musculoskeletal mechanism; no neuropathic component identified
             </div>
           </div>
           <div class="seg-legend-item">
-            <div class="seg-dot" style="background:var(--chart2);"></div>
+            <div class="seg-dot" style="background:var(--accent);"></div>
             <div>
               <strong>Mixed musculoskeletal + neuropathic (31%; n&nbsp;&asymp;&nbsp;6)</strong><br>
               Concurrent nociceptive/nociplastic and neuropathic components
             </div>
           </div>
         </div>
-
         <div class="mps-highlight">
           <strong>Myofascial Pain Syndrome (MPS)</strong> was diagnosed in
           <strong>100% of patients (18/18)</strong>, confirming it as the
           primary musculoskeletal abnormality across both pain-mechanism subgroups.
         </div>
+        <p class="figure-caption"><strong>Figure 1.</strong> Distribution of pain mechanism subtypes among LBP patients evaluated at the Interdisciplinary Pain Clinic (n&nbsp;=&nbsp;18). MPS was present in all cases irrespective of primary pain type.</p>
       </div>
     </div>
 
     <div class="section-card">
-      <div class="section-title accent-blue">4. Results &mdash; Pre-referral Pharmacotherapy</div>
+      <div class="section-title blue">4. Results — Pre-referral Pharmacotherapy</div>
       <div class="figure-wrap">
-        <div class="seg-bar-title">Figure 2. Pharmacological treatments prior to pain clinic referral</div>
+        <div class="fig-title">Figure 2. Pharmacological treatments prior to pain clinic referral</div>
         <div class="hbar-chart">
-          <div class="hbar-row">
+
+          <div>
             <div class="hbar-label-row">
               <span class="hbar-label">Opioid analgesics</span>
               <span class="hbar-value">83.3%</span>
             </div>
             <div class="hbar-track">
-              <div class="hbar-fill" style="width:83.3%;background:var(--chart2);">
-                <span class="hbar-fill-label">n&nbsp;=&nbsp;15</span>
-              </div>
+              <div class="hbar-fill" style="width:83.3%;background:var(--accent);">n&nbsp;=&nbsp;15</div>
             </div>
           </div>
 
-          <div class="hbar-row">
+          <div>
             <div class="hbar-label-row">
               <span class="hbar-label">Anticonvulsants (adjuvant analgesics)</span>
               <span class="hbar-value">50.0%</span>
             </div>
             <div class="hbar-track">
-              <div class="hbar-fill" style="width:50%;background:var(--chart4);">
-                <span class="hbar-fill-label">n&nbsp;=&nbsp;9</span>
-              </div>
+              <div class="hbar-fill" style="width:50%;background:var(--purple);">n&nbsp;=&nbsp;9</div>
             </div>
           </div>
+
         </div>
-        <p class="figure-caption"><strong>Figure 2.</strong> Proportion of patients using pharmacological agents prior to first pain clinic consultation. Opioid sub-classification predominantly comprised weak opioids.</p>
+        <p class="figure-caption"><strong>Figure 2.</strong> Proportion of patients using pharmacological agents prior to first pain clinic consultation. Opioid use sub-classification comprised predominantly weak opioids.</p>
       </div>
     </div>
 
   </div><!-- /col 2 -->
 
-  <!-- ══ COLUMN 3: RESULTS (cont.) + CONCLUSIONS + REFS ══ -->
+  <!-- ── COLUMN 3: RESULTS (cont.) + CONCLUSIONS + REFERENCES ── -->
   <div class="col">
 
     <div class="section-card">
-      <div class="section-title accent-blue">4. Results &mdash; Biopsychosocial Profile</div>
+      <div class="section-title blue">4. Results — Biopsychosocial Profile</div>
       <div class="figure-wrap">
-        <div class="seg-bar-title">Figure 3. Biopsychosocial burden at time of pain clinic intake</div>
+        <div class="fig-title">Figure 3. Biopsychosocial burden at pain clinic intake</div>
         <div class="hbar-chart">
 
-          <div class="hbar-row">
+          <div>
             <div class="hbar-label-row">
               <span class="hbar-label">Mood impairment</span>
               <span class="hbar-value">100%</span>
             </div>
             <div class="hbar-track">
-              <div class="hbar-fill" style="width:100%;background:var(--chart1);">
-                <span class="hbar-fill-label">18/18</span>
-              </div>
+              <div class="hbar-fill" style="width:100%;background:var(--secondary);">18/18</div>
             </div>
           </div>
 
-          <div class="hbar-row">
+          <div>
             <div class="hbar-label-row">
               <span class="hbar-label">Physical inactivity</span>
               <span class="hbar-value">77.8%</span>
             </div>
             <div class="hbar-track">
-              <div class="hbar-fill" style="width:77.8%;background:var(--chart2);">
-                <span class="hbar-fill-label">n&nbsp;&asymp;&nbsp;14</span>
-              </div>
+              <div class="hbar-fill" style="width:77.8%;background:var(--accent);">n&nbsp;&asymp;&nbsp;14</div>
             </div>
           </div>
 
-          <div class="hbar-row">
+          <div>
             <div class="hbar-label-row">
               <span class="hbar-label">Non-restorative sleep</span>
               <span class="hbar-value">75.0%</span>
             </div>
             <div class="hbar-track">
-              <div class="hbar-fill" style="width:75%;background:var(--chart4);">
-                <span class="hbar-fill-label">n&nbsp;&asymp;&nbsp;14</span>
-              </div>
+              <div class="hbar-fill" style="width:75%;background:var(--purple);">n&nbsp;&asymp;&nbsp;14</div>
             </div>
           </div>
 
-          <div class="hbar-row">
+          <div>
             <div class="hbar-label-row">
               <span class="hbar-label">Prior lumbar surgery</span>
               <span class="hbar-value">38.9%</span>
             </div>
             <div class="hbar-track">
-              <div class="hbar-fill" style="width:38.9%;background:var(--chart3);">
-                <span class="hbar-fill-label">n&nbsp;=&nbsp;7</span>
-              </div>
+              <div class="hbar-fill" style="width:38.9%;background:var(--green);">n&nbsp;=&nbsp;7</div>
             </div>
           </div>
 
@@ -823,10 +777,10 @@ html, body {
       <div class="section-title">References</div>
       <div class="references">
         <ol>
-          <li>King W, Bogduk N. Chronic low back pain. In: Loeser JD, Butler SH, Chapman CR, Turk DC, eds. <em>Bonica&rsquo;s Management of Pain</em>. 5th ed. Wolters Kluwer; 2019.</li>
+          <li>King W, Bogduk N. Chronic low back pain. In: Loeser JD, Butler SH, Chapman CR, Turk DC, eds. <em>Bonica's Management of Pain</em>. 5th ed. Wolters Kluwer; 2019.</li>
           <li>Vlaeyen JWS, Maher CG, Wiech K, et al. Low back pain. <em>Nat Rev Dis Primers</em>. 2018;4:52. <a href="https://doi.org/10.1038/s41572-018-0052-1">doi:10.1038/s41572-018-0052-1</a></li>
-          <li>Hartvigsen J, Hancock MJ, Kongsted A, et al. What low back pain is and why we need to pay attention. <em>Lancet</em>. 2018;391(10137):2356-2367. <a href="https://doi.org/10.1016/S0140-6736(18)30480-X">doi:10.1016/S0140-6736(18)30480-X</a></li>
-          <li>GBD 2017 Disease and Injury Incidence and Prevalence Collaborators. Global, regional, and national incidence, prevalence, and years lived with disability for 354 diseases and injuries. <em>Lancet</em>. 2018;392(10159):1789-1858. <a href="https://doi.org/10.1016/S0140-6736(18)32279-7">doi:10.1016/S0140-6736(18)32279-7</a></li>
+          <li>Hartvigsen J, Hancock MJ, Kongsted A, et al. What low back pain is and why we need to pay attention. <em>Lancet</em>. 2018;391(10137):2356–2367. <a href="https://doi.org/10.1016/S0140-6736(18)30480-X">doi:10.1016/S0140-6736(18)30480-X</a></li>
+          <li>GBD 2017 Disease and Injury Incidence and Prevalence Collaborators. Global, regional, and national incidence, prevalence, and years lived with disability for 354 diseases and injuries. <em>Lancet</em>. 2018;392(10159):1789–1858. <a href="https://doi.org/10.1016/S0140-6736(18)32279-7">doi:10.1016/S0140-6736(18)32279-7</a></li>
           <li>Wu A, March L, Zheng X, et al. Global low back pain prevalence and years lived with disability from 1990 to 2017. <em>Ann Transl Med</em>. 2020;8(6):299. <a href="https://doi.org/10.21037/atm.2020.02.175">doi:10.21037/atm.2020.02.175</a></li>
           <li>Fern&aacute;ndez-de-Las-Pe&ntilde;as C, Nijs J, Cagnie B, et al. Myofascial pain syndrome: a nociceptive condition comorbid with neuropathic or nociplastic pain. <em>Life (Basel)</em>. 2023;13(3):694. <a href="https://doi.org/10.3390/life13030694">doi:10.3390/life13030694</a></li>
           <li>Fitzcharles MA, Cohen SP, Clauw DJ, et al. Chronic primary musculoskeletal pain. <em>Pain Rep</em>. 2022;7(5):e1024. <a href="https://doi.org/10.1097/PR9.0000000000001024">doi:10.1097/PR9.0000000000001024</a></li>
@@ -839,9 +793,9 @@ html, body {
 
 </main>
 
-<!-- ═══════════════════════════════════════
+<!-- ═══════════════════════════════════
      FOOTER
-═══════════════════════════════════════ -->
+═══════════════════════════════════ -->
 <footer class="poster-footer">
   <span>Retrospective observational study &bull; IOT &ndash; HCFMUSP &bull; S&atilde;o Paulo, Brazil &bull; 2025</span>
   <span><strong>Correspondence:</strong> yeng.lt@hc.fm.usp.br</span>
