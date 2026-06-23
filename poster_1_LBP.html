@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Poster 1 – Low Back Pain in a Orthopedic Pain Clinic</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue:    #1a3a6b;
+    --teal:    #006f8e;
+    --accent:  #d94f1e;
+    --light:   #e8f0f8;
+    --bg:      #f0f4f8;
+    --white:   #ffffff;
+    --text:    #1c1c1c;
+    --muted:   #4a5568;
+    --border:  #c8d6e5;
+  }
+
+  html, body {
+    width: 1122px;       /* A0 portrait scaled ÷ 2.66 */
+    min-height: 1587px;
+    background: #ccc;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .poster {
+    width: 1122px;
+    min-height: 1587px;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 24px rgba(0,0,0,.35);
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--teal) 100%);
+    color: var(--white);
+    padding: 28px 36px 22px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: center;
+  }
+  .header-left { flex: 1; }
+  .header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -.3px;
+    margin-bottom: 8px;
+    text-shadow: 0 1px 3px rgba(0,0,0,.2);
+  }
+  .header h1 span { color: #f5c542; }
+  .authors {
+    font-size: 10.5px;
+    opacity: .92;
+    line-height: 1.5;
+    margin-bottom: 6px;
+  }
+  .institution {
+    font-size: 10px;
+    opacity: .85;
+    font-style: italic;
+  }
+  .badge {
+    background: var(--white);
+    color: var(--blue);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    text-align: center;
+    white-space: nowrap;
+    line-height: 1.4;
+    box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  }
+  .badge .n { font-size: 32px; display: block; color: var(--accent); }
+
+  /* ── COLOR BAR ── */
+  .colorbar {
+    height: 7px;
+    background: linear-gradient(90deg, var(--accent) 0%, #f5a623 50%, var(--teal) 100%);
+  }
+
+  /* ── BODY ── */
+  .body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    padding: 0;
+    background: var(--bg);
+  }
+
+  .col {
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .col:not(:last-child) { border-right: 2px solid var(--border); }
+
+  /* ── SECTION BOX ── */
+  .section {
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,0,0,.08);
+  }
+  .section-header {
+    background: var(--blue);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    padding: 7px 14px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .section-header.teal { background: var(--teal); }
+  .section-header.accent { background: var(--accent); }
+  .section-body {
+    padding: 12px 14px;
+    line-height: 1.55;
+    font-size: 12.5px;
+  }
+  .section-body p + p { margin-top: 7px; }
+
+  /* ── STAT CARDS ── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 12px 14px;
+  }
+  .stat-card {
+    background: var(--light);
+    border-radius: 8px;
+    padding: 9px 8px;
+    text-align: center;
+    border-top: 3px solid var(--teal);
+  }
+  .stat-card .val {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--blue);
+    line-height: 1;
+    display: block;
+  }
+  .stat-card .lbl {
+    font-size: 9.5px;
+    color: var(--muted);
+    line-height: 1.3;
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ── HORIZONTAL BAR CHART ── */
+  .bar-chart { padding: 10px 14px 14px; }
+  .bar-item { margin-bottom: 9px; }
+  .bar-label {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 3px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .bar-label strong { color: var(--text); font-size: 11.5px; }
+  .bar-track {
+    background: var(--light);
+    border-radius: 20px;
+    height: 18px;
+    overflow: hidden;
+    position: relative;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 20px;
+    background: linear-gradient(90deg, var(--teal), #0099bb);
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: white;
+    min-width: 32px;
+    transition: width .3s;
+  }
+  .bar-fill.red { background: linear-gradient(90deg, var(--accent), #e8744a); }
+  .bar-fill.gold { background: linear-gradient(90deg, #c07a00, #f5a623); }
+
+  /* ── DONUT CHART ── */
+  .donut-wrap {
+    padding: 10px 14px 14px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .donut-legend { flex: 1; }
+  .legend-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 11.5px;
+    line-height: 1.4;
+  }
+  .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .legend-item .pct {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    display: block;
+    line-height: 1;
+  }
+
+  /* ── CONCLUSIONS LIST ── */
+  .concl-list {
+    list-style: none;
+    padding: 10px 14px 14px;
+  }
+  .concl-list li {
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    background: var(--light);
+    border-left: 4px solid var(--teal);
+    border-radius: 0 6px 6px 0;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .concl-list li:last-child { margin-bottom: 0; }
+
+  /* ── REFERENCES ── */
+  .refs {
+    font-size: 9.5px;
+    color: var(--muted);
+    line-height: 1.5;
+    padding: 10px 14px 14px;
+  }
+  .refs ol { padding-left: 14px; }
+  .refs li { margin-bottom: 3px; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--blue);
+    color: rgba(255,255,255,.8);
+    font-size: 9px;
+    padding: 8px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    letter-spacing: .3px;
+  }
+  .footer strong { color: white; }
+
+  /* ── ICON ── */
+  .ico { font-size: 15px; }
+
+  /* ── KEY FINDING BOX ── */
+  .key-box {
+    background: linear-gradient(135deg, var(--blue), var(--teal));
+    color: white;
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 12.5px;
+    line-height: 1.55;
+    box-shadow: 0 2px 10px rgba(0,0,0,.15);
+  }
+  .key-box strong {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13.5px;
+    display: block;
+    margin-bottom: 6px;
+    color: #f5c542;
+  }
+
+  .divider { height: 1px; background: var(--border); margin: 0 14px; }
+
+  .tag {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-bottom: 6px;
+  }
+</style>
+</head>
+<body>
+<div class="poster">
+
+  <!-- ═══ HEADER ═══ -->
+  <div class="header">
+    <div class="header-left">
+      <h1>Low Back Pain in a Orthopedic Pain Clinic:<br><span>Diagnosis Challenges</span></h1>
+      <div class="authors">
+        Azeredo MAR &bull; Sperandio RW &bull; Santos RG &bull; Ramos DFRH &bull; Pereira RJ &bull; Fernandes AM &bull; Pacini L &bull; Sena R &bull;
+        Iobbi JA &bull; Panteon LG &bull; Yonekawa NS &bull; Kubota G &bull; Kaziyama HH &bull; Sabe FF &bull; Andrade DC &bull; Teixeira MJ &bull; <strong>Yeng LT</strong>
+      </div>
+      <div class="institution">
+        Interdisciplinary Pain Clinic &ndash; Spinal Unit, Institute of Orthopedics and Traumatology,
+        Hospital das Cl&iacute;nicas, Faculdade de Medicina, Universidade de S&atilde;o Paulo (FMUSP), Brazil
+      </div>
+    </div>
+    <div class="badge">
+      <span class="n">18</span>
+      patients<br>evaluated
+    </div>
+  </div>
+  <div class="colorbar"></div>
+
+  <!-- ═══ BODY ═══ -->
+  <div class="body">
+
+    <!-- ══ COLUMN 1 ══ -->
+    <div class="col">
+
+      <div class="section">
+        <div class="section-header"><span class="ico">◉</span> Background &amp; Rationale</div>
+        <div class="section-body">
+          <p>Low back pain (LBP) is the <strong>most frequent pain complaint worldwide</strong> and the
+          leading cause of years lived with disability (YLDs) globally, with global YLDs increasing
+          52.7% between 1990 and 2017 to reach 64.9 million.<sup>3,4,5</sup></p>
+          <p>Approximately <strong>90% of cases are considered non-specific</strong>, lacking a clear
+          pathoanatomical cause.<sup>1,2</sup> Contemporary physiopathology of LBP relies on a
+          <strong>biopsychosocial model</strong>, integrating biological, psychological, and social
+          factors — superseding the traditional injury-based model.<sup>1,2</sup></p>
+          <p>Under the current IASP pain classification, LBP may present as nociceptive, neuropathic,
+          nociplastic, or mixed pain.<sup>2</sup> Myofascial pain syndrome (MPS), a primary nociceptive
+          condition, may coexist with neuropathic or nociplastic components, complicating
+          diagnosis.<sup>6,7</sup></p>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-header teal"><span class="ico">⚙</span> Objectives</div>
+        <div class="section-body">
+          <p>To characterize the <strong>clinical and diagnostic profile</strong> of patients with
+          chronic LBP referred from the Spinal Unit to an Interdisciplinary Pain Clinic, identifying
+          pain mechanisms, comorbidities, and prior treatment patterns.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-header"><span class="ico">🔬</span> Methods</div>
+        <div class="section-body">
+          <p><strong>Design:</strong> Retrospective observational study. Review of medical records.</p>
+          <p><strong>Period:</strong> January 2025 – December 2025</p>
+          <p><strong>Setting:</strong> Interdisciplinary Pain Clinic, Institute of Orthopedics,
+          quaternary teaching hospital, S&atilde;o Paulo, Brazil.</p>
+          <p><strong>Population:</strong> Consecutive patients referred from the Spinal Unit with
+          the diagnosis of chronic LBP.</p>
+          <p><strong>Variables collected:</strong> Demographics (sex, age), pain duration (months),
+          previous lumbar surgery, pain type classification, myofascial syndrome, sleep quality,
+          physical activity, mood, and prior pharmacological treatments.</p>
+          <p><strong>Diagnostic approach:</strong> Detailed history plus comprehensive
+          musculoskeletal and neurological examination performed in all patients.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-header teal"><span class="ico">👤</span> Patient Demographics</div>
+        <div class="stat-grid">
+          <div class="stat-card">
+            <span class="val">55%</span>
+            <span class="lbl">Female</span>
+          </div>
+          <div class="stat-card">
+            <span class="val">56</span>
+            <span class="lbl">Mean age (years)</span>
+          </div>
+          <div class="stat-card">
+            <span class="val">103</span>
+            <span class="lbl">Mean pain duration (months)</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /col1 -->
+
+    <!-- ══ COLUMN 2 ══ -->
+    <div class="col">
+
+      <div class="section">
+        <div class="section-header accent"><span class="ico">📊</span> Results — Pain Classification</div>
+
+        <!-- Donut / visual split -->
+        <div class="donut-wrap">
+          <svg width="140" height="140" viewBox="0 0 140 140">
+            <!-- 69% = 248.4° ; 31% = 111.6° -->
+            <!-- teal arc: 0 to 248.4° -->
+            <circle cx="70" cy="70" r="56" fill="none" stroke="#e8f0f8" stroke-width="22"/>
+            <!-- Nociceptive/Nociplastic 69% -->
+            <circle cx="70" cy="70" r="56"
+              fill="none"
+              stroke="#006f8e"
+              stroke-width="22"
+              stroke-dasharray="242 352"
+              stroke-dashoffset="88"
+              stroke-linecap="butt"
+              transform="rotate(-90 70 70)"/>
+            <!-- Mixed 31% -->
+            <circle cx="70" cy="70" r="56"
+              fill="none"
+              stroke="#d94f1e"
+              stroke-width="22"
+              stroke-dasharray="109 352"
+              stroke-dashoffset="-154"
+              stroke-linecap="butt"
+              transform="rotate(-90 70 70)"/>
+            <text x="70" y="64" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="11" fill="#1a3a6b" font-weight="700">Pain</text>
+            <text x="70" y="78" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="11" fill="#1a3a6b" font-weight="700">Types</text>
+          </svg>
+          <div class="donut-legend">
+            <div class="legend-item">
+              <div class="dot" style="background:#006f8e;"></div>
+              <div>
+                <span class="pct" style="color:#006f8e;">69%</span>
+                Nociceptive &amp;<br>Nociplastic Pain<br>
+                <small style="color:#4a5568;font-size:10px;">(musculoskeletal — no neuropathic component)</small>
+              </div>
+            </div>
+            <div class="legend-item">
+              <div class="dot" style="background:#d94f1e;"></div>
+              <div>
+                <span class="pct" style="color:#d94f1e;">31%</span>
+                Mixed Pain<br>
+                <small style="color:#4a5568;font-size:10px;">(musculoskeletal + neuropathic component)</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div style="padding:10px 14px 8px;">
+          <span class="tag">Key finding</span>
+          <div style="background:#e8f0f8;border-left:4px solid #1a3a6b;border-radius:0 6px 6px 0;padding:9px 11px;font-size:12px;line-height:1.5;">
+            <strong>Myofascial Pain Syndrome (MPS) was diagnosed in
+            100% of patients</strong>, confirming it as the main physical abnormality
+            in this LBP cohort, regardless of the overall pain type.
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-header"><span class="ico">💊</span> Prior Pharmacological Treatment</div>
+        <div class="bar-chart">
+          <div class="bar-item">
+            <div class="bar-label"><strong>Opioid use</strong> <span>83%</span></div>
+            <div class="bar-track"><div class="bar-fill red" style="width:83%">83%</div></div>
+          </div>
+          <div class="bar-item" style="margin-top:4px;">
+            <div class="bar-label"><span style="font-size:10px;color:#666;">  &nbsp;&nbsp;of which: weak opioids</span></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label"><strong>Anticonvulsants</strong> <span>50%</span></div>
+            <div class="bar-track"><div class="bar-fill gold" style="width:50%">50%</div></div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div style="padding:8px 14px 12px;font-size:11.5px;color:#4a5568;font-style:italic;line-height:1.5;">
+          The high prevalence of opioid use prior to the first pain clinic consultation
+          suggests under-recognition of the musculoskeletal nature of pain and
+          over-reliance on pharmacological approaches at the referring unit.
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-header teal"><span class="ico">🔄</span> Prior Lumbar Surgery</div>
+        <div style="padding:12px 14px;display:flex;align-items:center;gap:16px;">
+          <svg width="90" height="90" viewBox="0 0 90 90">
+            <circle cx="45" cy="45" r="40" fill="#e8f0f8"/>
+            <path d="M45 5 A40 40 0 0 1 85 45" fill="#d94f1e"/>
+            <!-- 38% = 136.8° arc -->
+            <circle cx="45" cy="45" r="40" fill="none" stroke="#d94f1e" stroke-width="14"
+              stroke-dasharray="95 251" stroke-dashoffset="63"
+              transform="rotate(-90 45 45)"/>
+            <text x="45" y="49" text-anchor="middle" font-family="Montserrat,sans-serif"
+              font-size="18" fill="#d94f1e" font-weight="800">38%</text>
+          </svg>
+          <div style="font-size:12.5px;line-height:1.55;color:#1c1c1c;">
+            <strong>38% of patients</strong> had undergone at least one
+            prior lumbar spine surgical procedure before referral to the
+            pain clinic — underscoring that prior surgery did not resolve
+            the underlying musculoskeletal dysfunction.
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /col2 -->
+
+    <!-- ══ COLUMN 3 ══ -->
+    <div class="col">
+
+      <div class="section">
+        <div class="section-header accent"><span class="ico">📊</span> Results — Biopsychosocial Factors</div>
+        <div class="bar-chart">
+          <div class="bar-item">
+            <div class="bar-label"><strong>Mood impairment</strong> <span>100%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:100%">100%</div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label"><strong>Non-restorative sleep</strong> <span>75%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:75%">75%</div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label"><strong>Physical inactivity</strong> <span>77%</span></div>
+            <div class="bar-track"><div class="bar-fill red" style="width:77%">77%</div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label"><strong>Prior lumbar surgery</strong> <span>38%</span></div>
+            <div class="bar-track"><div class="bar-fill gold" style="width:38%">38%</div></div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div style="padding:8px 14px 12px;">
+          <div style="font-size:11px;color:#4a5568;line-height:1.5;">
+            All biopsychosocial factors were highly prevalent, reinforcing the
+            need for a mechanism-oriented, multidisciplinary approach.
+          </div>
+        </div>
+      </div>
+
+      <div class="key-box">
+        <strong>&#9733; Main Findings Summary</strong>
+        LBP was a primary reason for referral to the orthopedic pain clinic.
+        The high prevalence of MPS (100%), non-restorative sleep (75%), physical inactivity (77%),
+        mood impairment (100%), prior surgeries (38%), and opioid use (83%) highlights
+        the <em>multifactorial, biopsychosocial nature</em> of this population.
+      </div>
+
+      <div class="section">
+        <div class="section-header"><span class="ico">✔</span> Conclusions</div>
+        <ul class="concl-list">
+          <li>MPS was the <strong>main physical abnormality</strong> in all LBP patients, confirming its central role in the orthopedic pain clinic population.</li>
+          <li>Nociceptive/nociplastic sources of pain were <strong>more frequent</strong> (69%) than mixed nociceptive-neuropathic pain (31%).</li>
+          <li>The very high prevalence of opioid use (83%) prior to pain clinic referral indicates a <strong>treatment mismatch</strong> with the predominant musculoskeletal pain mechanism.</li>
+          <li>The convergence of non-restorative sleep, physical inactivity, and mood impairment in <strong>all patients</strong> reinforces the recommendation for a <strong>multidisciplinary, mechanism-oriented treatment approach</strong>.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-header teal"><span class="ico">📚</span> References</div>
+        <div class="refs">
+          <ol>
+            <li>King W, Bogduk N. Chronic low back pain. In: Loeser JD, Butler SH, Chapman CR, Turk DC, eds. <em>Bonica's Management of Pain</em>. 5th ed. Wolters Kluwer; 2019.</li>
+            <li>Vlaeyen JWS, Maher CG, Wiech K, et al. Low back pain. <em>Nat Rev Dis Primers</em>. 2018;4:52. <a href="https://doi.org/10.1038/s41572-018-0052-1">DOI</a></li>
+            <li>Hartvigsen J, et al. What low back pain is and why we need to pay attention. <em>Lancet</em>. 2018;391(10137):2356-2367. <a href="https://doi.org/10.1016/S0140-6736(18)30480-X">DOI</a></li>
+            <li>GBD 2017 Disease and Injury Incidence and Prevalence Collaborators. <em>Lancet</em>. 2018;392(10159):1789-1858. <a href="https://doi.org/10.1016/S0140-6736(18)32279-7">DOI</a></li>
+            <li>Wu A, et al. Global low back pain prevalence and years lived with disability from 1990 to 2017. <em>Ann Transl Med</em>. 2020;8(6):299. <a href="https://doi.org/10.21037/atm.2020.02.175">DOI</a></li>
+            <li>Fern&aacute;ndez-de-Las-Pe&ntilde;as C, et al. Myofascial Pain Syndrome: A Nociceptive Condition Comorbid with Neuropathic or Nociplastic Pain. <em>Life (Basel)</em>. 2023;13(3):694. <a href="https://doi.org/10.3390/life13030694">DOI</a></li>
+            <li>Fitzcharles MA, et al. Chronic primary musculoskeletal pain. <em>Pain Rep</em>. 2022;7(5):e1024. <a href="https://doi.org/10.1097/PR9.0000000000001024">DOI</a></li>
+          </ol>
+        </div>
+      </div>
+
+    </div><!-- /col3 -->
+
+  </div><!-- /body -->
+
+  <!-- ═══ FOOTER ═══ -->
+  <div class="footer">
+    <span>Retrospective observational study &bull; January–December 2025 &bull; Instituto de Ortopedia e Traumatologia, HC-FMUSP, S&atilde;o Paulo, Brazil</span>
+    <span><strong>Correspondence:</strong> yeng.lt@hc.fm.usp.br</span>
+  </div>
+
+</div>
+</body>
+</html>
