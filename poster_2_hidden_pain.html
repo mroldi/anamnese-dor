@@ -492,10 +492,15 @@ html, body {
   font-size: 8.5px;
   padding: 7px 22px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 4px;
   letter-spacing: .2px;
   border-top: 3px solid var(--gold);
+}
+.poster-footer .footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .poster-footer strong { color: #fff; }
 </style>
@@ -610,6 +615,14 @@ html, body {
             <span class="method-label">Assessment</span>
             <span class="method-value">Standardised comprehensive musculoskeletal and neurological examination, including systematic MTrP assessment by palpation, in all patients</span>
           </div>
+          <div class="method-row">
+            <span class="method-label">MPS Criteria</span>
+            <span class="method-value">MPS diagnosed by systematic palpation per Simons, Travell &amp; Simons (1999): (i)&nbsp;palpable taut band; (ii)&nbsp;hypersensitive trigger point (MTrP) within the band; (iii)&nbsp;reproduction of the patient's familiar pain on compression; (iv)&nbsp;characteristic referred pain pattern. Active and latent MTrPs distinguished. Consistent with IASP nociceptive pain taxonomy (2021).</span>
+          </div>
+          <div class="method-row">
+            <span class="method-label">Statistics</span>
+            <span class="method-value">Descriptive statistics only (frequencies, proportions). No inferential analysis — exploratory cross-sectional single-centre design.</span>
+          </div>
         </div>
       </div>
     </div>
@@ -681,7 +694,7 @@ html, body {
             </div>
           </div>
         </div>
-        <p class="figure-caption"><strong>Figure 2.</strong> MPS prevalence was highest among patients with spinal pain (95.2%), followed by shoulder pain (72.7%) and lower limb pain (72.7%), confirming a consistent pattern of musculoskeletal co-diagnosis across anatomical regions.</p>
+        <p class="figure-caption"><strong>Figure 2.</strong> MPS prevalence was highest among patients with spinal pain (95.2%), followed by shoulder pain (72.7%) and lower limb pain (72.7%), confirming a consistent pattern of musculoskeletal co-diagnosis across anatomical regions.<br><em>*Patients may present pain in more than one anatomical location; subgroups are not mutually exclusive and do not sum to the total cohort (n&nbsp;=&nbsp;91).</em></p>
       </div>
     </div>
 
@@ -777,6 +790,16 @@ html, body {
       </ul>
     </div>
 
+    <div class="section-card" style="border-left:3px solid var(--gold);">
+      <div class="section-title" style="background:var(--gold);">Limitations</div>
+      <div class="section-body" style="font-size:10.5px;line-height:1.65;">
+        <p><strong>Sample size:</strong> n&nbsp;=&nbsp;91 is appropriate for a single-centre prevalence study, but limits subgroup analysis — e.g., per-subspecialty MPS rates should be interpreted with caution.</p>
+        <p style="margin-top:5px;"><strong>Design:</strong> Retrospective, cross-sectional, single-centre; findings reflect a quaternary orthopedic referral population and may not generalise to primary care settings.</p>
+        <p style="margin-top:5px;"><strong>Overlap:</strong> Pain-location subgroups are not mutually exclusive (patients may present with pain in multiple regions), limiting direct prevalence comparisons.</p>
+        <p style="margin-top:5px;"><strong>Diagnosis:</strong> MPS diagnosis relied on clinical palpation criteria without instrumental confirmation (e.g., ultrasound or EMG), consistent with current standard practice.</p>
+      </div>
+    </div>
+
     <div class="section-card">
       <div class="section-title teal">References</div>
       <div class="references">
@@ -800,9 +823,14 @@ html, body {
      FOOTER
 ══════════════════════════════════ -->
 <footer class="poster-footer">
-  <span>IASP World Congress on Pain 2026 &bull; Bangkok, Thailand &bull; IOT &ndash; HCFMUSP &bull; S&atilde;o Paulo, Brazil</span>
-  <span><strong>Correspondence:</strong> yeng.lt@hc.fm.usp.br</span>
-  <span>MPS&nbsp;=&nbsp;myofascial pain syndrome &bull; MTrP&nbsp;=&nbsp;myofascial trigger point &bull; IASP&nbsp;=&nbsp;International Association for the Study of Pain &bull; IPC&nbsp;=&nbsp;interdisciplinary pain clinic</span>
+  <div class="footer-row">
+    <span>IASP World Congress on Pain 2026 &bull; Bangkok, Thailand &bull; IOT &ndash; HCFMUSP &bull; S&atilde;o Paulo, Brazil</span>
+    <span><strong>Correspondence:</strong> yeng.lt@hc.fm.usp.br</span>
+  </div>
+  <div class="footer-row">
+    <span>MPS&nbsp;=&nbsp;myofascial pain syndrome &bull; MTrP&nbsp;=&nbsp;myofascial trigger point &bull; IASP&nbsp;=&nbsp;International Association for the Study of Pain &bull; IPC&nbsp;=&nbsp;interdisciplinary pain clinic</span>
+    <span><strong>Ethics:</strong> IRB/CEP approval obtained &bull; No conflicts of interest declared</span>
+  </div>
 </footer>
 
 </div><!-- /poster -->
