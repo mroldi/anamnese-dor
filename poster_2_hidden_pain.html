@@ -286,6 +286,56 @@ html, body {
 }
 
 /* ══════════════════════════════
+   TABLE 1
+══════════════════════════════ */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.data-table caption {
+  caption-side: bottom;
+  font-size: 9.5px;
+  color: var(--muted);
+  font-style: italic;
+  text-align: left;
+  padding: 5px 0 2px;
+  line-height: 1.5;
+}
+
+.data-table thead th {
+  background: var(--light);
+  color: var(--congress);
+  font-size: 9.5px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  padding: 6px 10px;
+  text-align: left;
+  border-bottom: 2px solid var(--congress);
+}
+
+.data-table thead th:last-child { text-align: right; }
+.data-table tbody tr:nth-child(even) td { background: #F4F6FB; }
+
+.data-table tbody td {
+  padding: 5px 10px;
+  border-bottom: 1px solid #DDE4F0;
+  vertical-align: middle;
+  line-height: 1.5;
+}
+
+.data-table tbody td:last-child {
+  text-align: right;
+  font-weight: bold;
+  color: var(--mid-blue);
+  white-space: nowrap;
+}
+
+.data-table tbody tr:last-child td { border-bottom: none; }
+
+/* ══════════════════════════════
    FIGURES / CHARTS
 ══════════════════════════════ */
 .figure-wrap { padding: 11px 12px 10px; }
@@ -644,6 +694,31 @@ html, body {
 
   <!-- ── COLUMN 2 ── -->
   <div class="col">
+
+    <div class="section-card">
+      <div class="section-title teal">4. Results — Sample Characteristics</div>
+      <div style="padding:11px 12px 13px;">
+        <table class="data-table">
+          <caption>Table 1. Demographic and clinical profile of the study cohort (n&nbsp;=&nbsp;91). Age and biopsychosocial variables from institutional database; MPS and pain-type counts per abstract.</caption>
+          <thead>
+            <tr><th>Variable</th><th style="text-align:right;">Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Sample size (n)</td><td>91</td></tr>
+            <tr><td>Female sex</td><td>48 (52.7%)</td></tr>
+            <tr><td>Mean age (years)</td><td>49</td></tr>
+            <tr><td>Mean pain duration</td><td>100 months (~8.3 years)</td></tr>
+            <tr><td>MPS (myofascial pain syndrome)</td><td>70 (76.9%)</td></tr>
+            <tr><td>Neuropathic pain (any component)</td><td>27 (29.7%)</td></tr>
+            <tr><td>Mixed pain (MPS + neuropathic)</td><td>19 (20.9%)</td></tr>
+            <tr><td>Non-restorative sleep</td><td>63 (69.2%)</td></tr>
+            <tr><td>Mood impairment</td><td>71 (78.0%)</td></tr>
+            <tr><td>Physical inactivity</td><td>67 (73.6%)</td></tr>
+            <tr><td>Opioid use</td><td>52 (57.1%)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
     <div class="section-card">
       <div class="section-title teal">4. Results — Overall MPS Prevalence</div>
