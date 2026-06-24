@@ -6,6 +6,7 @@ Backend FastAPI — Google Sheets + PDF
 import os
 import json
 import io
+import re
 from datetime import datetime
 from pathlib import Path
 
@@ -14,6 +15,7 @@ from fastapi.responses import HTMLResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
+import anthropic
 import gspread
 from google.oauth2.service_account import Credentials
 from reportlab.lib.pagesizes import A4
@@ -36,6 +38,9 @@ SCOPES = [
 # Google Sheets IDs (configurar no .env)
 SHEET_ID = os.getenv("GOOGLE_SHEET_ID", "")
 BACKUP_SHEET_ID = os.getenv("GOOGLE_BACKUP_SHEET_ID", "")
+
+# Anthropic API
+ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 
 # Service account key — pode ser caminho para arquivo JSON ou JSON string
 GOOGLE_CREDS_JSON = os.getenv("GOOGLE_CREDENTIALS_JSON", "")
@@ -488,6 +493,97 @@ def _build_pdf(data: dict, buffer: io.BytesIO):
     ]
 
     doc.build(story)
+
+
+# ─── POSTS — GERADOR SEMI-AUTOMÁTICO ───────────────────────
+@app.get("/posts", response_class=HTMLResponse)
+async def posts_page(request: Request):
+    return templates.TemplateResponse("posts.html", {"request": request})
+
+
+_SYSTEM_PROMPT_POSTS = """Você é o criador de conteúdo do Grupo de Dor do HC-FMUSP (Hospital das Clínicas da Faculdade de Medicina da USP), uma das maiores referências em tratamento de dor crônica do Brasil.
+
+Seu objetivo é criar posts educativos para o Instagram do grupo, voltados para pacientes, familiares e profissionais de saúde.
+
+REGRAS OBRIGATÓRIAS:
+- Tom: empático, acolhedor e educativo — nunca alarmista ou sensacionalista
+- Linguagem: clara e acessível, com mínimo de jargão técnico
+- Comprimento da legenda: 150–250 palavras
+- Estrutura: abertura impactante → conteúdo educativo → chamada para ação
+- Use emojis com moderação (3–5 por legenda)
+- Sempre termine com uma chamada para ação (salvar, compartilhar, comentar, marcar alguém)
+- Hashtags: 20–25 tags em português e inglês, misturando termos gerais e específicos de dor
+- Inclua sempre: #grupodedor #hcfmusp entre as hashtags
+
+RESPONDA APENAS EM JSON VÁLIDO com este formato exato:
+{
+  "legenda": "texto completo da legenda aqui",
+  "hashtags": "#tag1 #tag2 #tag3 ..."
+}"""
+
+_TOM_MAP = {
+    "educativo": "educativo e informativo",
+    "motivacional": "motivacional e encorajador",
+    "conscientizacao": "de conscientização e empatia",
+}
+
+_FORMATO_MAP = {
+    "post": "post único no feed",
+    "carrossel": "primeiro slide de um carrossel (introdução que convide a ver os próximos slides)",
+    "stories": "texto curto e impactante para stories (máximo 100 palavras na legenda)",
+}
+
+
+@app.post("/gerar-post")
+async def gerar_post(request: Request):
+    try:
+        data = await request.json()
+    except Exception:
+        raise HTTPException(status_code=400, detail="JSON inválido")
+
+    tema = data.get("tema", "").strip()
+    tom = data.get("tom", "educativo")
+    formato = data.get("formato", "post")
+
+    if not tema:
+        raise HTTPException(status_code=400, detail="Tema não informado")
+
+    if not ANTHROPIC_API_KEY:
+        return JSONResponse(
+            status_code=500,
+            content={"status": "error", "message": "ANTHROPIC_API_KEY não configurada no servidor"}
+        )
+
+    user_msg = (
+        f"Crie um post de Instagram com tom {_TOM_MAP.get(tom, 'educativo')} "
+        f"para {_FORMATO_MAP.get(formato, 'post único no feed')}.\n\n"
+        f"TEMA: {tema}\n\n"
+        "Represente o Grupo de Dor HC-FMUSP com excelência científica e humanidade."
+    )
+
+    try:
+        client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+        message = client.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=1024,
+            system=_SYSTEM_PROMPT_POSTS,
+            messages=[{"role": "user", "content": user_msg}],
+        )
+        raw = message.content[0].text
+        match = re.search(r"\{.*\}", raw, re.DOTALL)
+        if not match:
+            raise ValueError("Resposta fora do formato JSON esperado")
+        result = json.loads(match.group())
+        return {
+            "status": "ok",
+            "legenda": result.get("legenda", ""),
+            "hashtags": result.get("hashtags", ""),
+        }
+    except Exception as e:
+        return JSONResponse(
+            status_code=500,
+            content={"status": "error", "message": str(e)}
+        )
 
 
 # ─── HEALTH CHECK ──────────────────────────────────────────

@@ -17,3 +17,8 @@ GOOGLE_BACKUP_SHEET_ID=cole_aqui_o_id_da_planilha_backup
 
 # OPÇÃO B (desenvolvimento local): caminho para o arquivo JSON
 GOOGLE_CREDENTIALS_FILE=credentials.json
+
+# ── Anthropic (Gerador de Posts) ───────────────────────────
+# Chave da API do Anthropic para geração de posts com IA
+# Obter em: https://console.anthropic.com
+ANTHROPIC_API_KEY=sk-ant-...

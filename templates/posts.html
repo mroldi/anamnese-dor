@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerador de Posts · HC-FMUSP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+  <style>
+    /* ── Posts page extras ── */
+    .posts-shell {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-mid);
+      text-decoration: none;
+      margin-bottom: 28px;
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      transition: border-color .15s, color .15s;
+    }
+    .nav-back:hover { border-color: var(--accent); color: var(--accent); }
+
+    .page-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .page-desc {
+      font-size: 14px;
+      color: var(--text-mid);
+      margin-bottom: 32px;
+    }
+
+    /* ── Generator card ── */
+    .gen-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 32px;
+    }
+    .gen-card label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text-mid);
+      margin-bottom: 8px;
+    }
+    .gen-tema {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: var(--text);
+      background: var(--surface2);
+      transition: border-color .15s;
+      margin-bottom: 20px;
+    }
+    .gen-tema:focus { outline: none; border-color: var(--accent); background: #fff; }
+    .gen-tema::placeholder { color: var(--text-light); }
+
+    .gen-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 500px) { .gen-row { grid-template-columns: 1fr; } }
+
+    .gen-select {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--text);
+      background: var(--surface2);
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%235a5450' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 10px;
+    }
+    .gen-select:focus { outline: none; border-color: var(--accent); }
+
+    .btn-generate {
+      width: 100%;
+      padding: 14px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .15s, transform .1s;
+      letter-spacing: .02em;
+    }
+    .btn-generate:hover:not(:disabled) { background: var(--accent-dark); }
+    .btn-generate:active:not(:disabled) { transform: scale(.98); }
+    .btn-generate:disabled { opacity: .6; cursor: not-allowed; }
+
+    /* ── Result card ── */
+    .result-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 32px;
+      display: none;
+    }
+    .result-card.visible { display: block; }
+
+    .result-header {
+      background: linear-gradient(135deg, var(--accent) 0%, #c0392b 100%);
+      color: white;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .result-header-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+    }
+    .result-header-meta {
+      font-size: 12px;
+      opacity: .75;
+    }
+
+    .result-body { padding: 24px; }
+
+    .result-section { margin-bottom: 24px; }
+    .result-section:last-child { margin-bottom: 0; }
+
+    .result-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--text-light);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .result-textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--text);
+      background: var(--surface2);
+      resize: vertical;
+      line-height: 1.7;
+      transition: border-color .15s;
+    }
+    .result-textarea:focus { outline: none; border-color: var(--accent); background: #fff; }
+
+    .char-count {
+      font-size: 11px;
+      color: var(--text-light);
+      text-align: right;
+      margin-top: 4px;
+    }
+    .char-count.over { color: #c0392b; font-weight: 600; }
+
+    .btn-copy {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 12px;
+      font-family: var(--font-sans);
+      color: var(--text-mid);
+      background: var(--surface);
+      cursor: pointer;
+      transition: border-color .15s, color .15s, background .15s;
+    }
+    .btn-copy:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-copy.copied { border-color: var(--green); color: var(--green); background: var(--green-light); }
+
+    .result-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .btn-action {
+      flex: 1;
+      min-width: 140px;
+      padding: 11px 16px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .15s;
+      border: 1.5px solid;
+      text-align: center;
+    }
+    .btn-copy-all {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+    .btn-copy-all:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+    .btn-copy-all.copied { background: var(--green); border-color: var(--green); }
+    .btn-new {
+      background: transparent;
+      color: var(--text-mid);
+      border-color: var(--border);
+    }
+    .btn-new:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Spinner ── */
+    .spinner-wrap {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      padding: 40px;
+      color: var(--text-mid);
+      font-size: 14px;
+    }
+    .spinner-wrap.visible { display: flex; }
+    .spinner {
+      width: 36px; height: 36px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── History ── */
+    .history-section { margin-top: 8px; }
+    .history-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--text-light);
+      margin-bottom: 16px;
+    }
+    .history-list { display: flex; flex-direction: column; gap: 10px; }
+    .history-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      transition: border-color .15s;
+    }
+    .history-item:hover { border-color: var(--accent); }
+    .history-item-info { flex: 1; min-width: 0; }
+    .history-item-tema {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .history-item-meta {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+    .history-item-actions { display: flex; gap: 6px; flex-shrink: 0; }
+    .btn-hist {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text-mid);
+      transition: all .12s;
+    }
+    .btn-hist:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-hist-del:hover { border-color: #c0392b; color: #c0392b; }
+
+    .empty-history {
+      text-align: center;
+      padding: 24px;
+      color: var(--text-light);
+      font-size: 14px;
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-sm);
+    }
+
+    /* ── Error msg ── */
+    .error-msg {
+      display: none;
+      background: #fff0f2;
+      border: 1px solid #f5c6cb;
+      border-radius: var(--radius-sm);
+      color: #c0392b;
+      padding: 12px 16px;
+      font-size: 14px;
+      margin-top: 12px;
+    }
+    .error-msg.visible { display: block; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo-block">
+      <span class="logo-cross">✚</span>
+      <div>
+        <p class="logo-sub">Grupo de Dor</p>
+        <h1 class="logo-title">HC · FMUSP</h1>
+      </div>
+    </div>
+    <p class="header-tagline">Gerador de Posts</p>
+  </div>
+</header>
+
+<main class="posts-shell">
+
+  <a href="/" class="nav-back">← Voltar à Anamnese</a>
+
+  <h2 class="page-title">Gerador de Posts</h2>
+  <p class="page-desc">Digite o tema, escolha o tom e o formato — a IA gera um rascunho que você revisa antes de publicar.</p>
+
+  <!-- ── Formulário ── -->
+  <div class="gen-card">
+    <div>
+      <label for="tema">Tema do post</label>
+      <input
+        type="text"
+        id="tema"
+        class="gen-tema"
+        placeholder="Ex: fibromialgia, sono e dor crônica, como funciona a dor neuropática..."
+        maxlength="200"
+      />
+    </div>
+
+    <div class="gen-row">
+      <div>
+        <label for="tom">Tom</label>
+        <select id="tom" class="gen-select">
+          <option value="educativo">Educativo e informativo</option>
+          <option value="motivacional">Motivacional e encorajador</option>
+          <option value="conscientizacao">Conscientização e empatia</option>
+        </select>
+      </div>
+      <div>
+        <label for="formato">Formato</label>
+        <select id="formato" class="gen-select">
+          <option value="post">Post único no feed</option>
+          <option value="carrossel">Carrossel (intro)</option>
+          <option value="stories">Stories</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn-generate" id="btnGerar" onclick="gerarPost()">
+      Gerar rascunho
+    </button>
+    <div class="error-msg" id="errorMsg"></div>
+  </div>
+
+  <!-- ── Spinner ── -->
+  <div class="spinner-wrap" id="spinnerWrap">
+    <div class="spinner"></div>
+    <span>Gerando rascunho...</span>
+  </div>
+
+  <!-- ── Resultado ── -->
+  <div class="result-card" id="resultCard">
+    <div class="result-header">
+      <span class="result-header-title">Rascunho gerado</span>
+      <span class="result-header-meta" id="resultMeta"></span>
+    </div>
+    <div class="result-body">
+
+      <div class="result-section">
+        <div class="result-label">
+          <span>Legenda</span>
+          <button class="btn-copy" id="btnCopyLegenda" onclick="copiarTexto('legendaTA', this)">Copiar</button>
+        </div>
+        <textarea id="legendaTA" class="result-textarea" rows="10" oninput="contarChars(this, 'charLegenda', 2200)"></textarea>
+        <div class="char-count" id="charLegenda">0 / 2200 caracteres</div>
+      </div>
+
+      <div class="result-section">
+        <div class="result-label">
+          <span>Hashtags</span>
+          <button class="btn-copy" id="btnCopyHashtags" onclick="copiarTexto('hashtagsTA', this)">Copiar</button>
+        </div>
+        <textarea id="hashtagsTA" class="result-textarea" rows="3" oninput="contarChars(this, 'charHashtags', 500)"></textarea>
+        <div class="char-count" id="charHashtags">0 / 500 caracteres</div>
+      </div>
+
+      <div class="result-actions">
+        <button class="btn-action btn-copy-all" id="btnCopyAll" onclick="copiarTudo()">
+          Copiar tudo (legenda + hashtags)
+        </button>
+        <button class="btn-action btn-new" onclick="novoPost()">
+          Gerar novo rascunho
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Histórico ── -->
+  <div class="history-section">
+    <div class="history-title">Rascunhos recentes</div>
+    <div class="history-list" id="historyList"></div>
+  </div>
+
+</main>
+
+<script>
+  const HISTORY_KEY = 'hcfmusp_posts_history';
+
+  // ── Histórico (localStorage) ──────────────────────────────
+  function getHistory() {
+    try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); }
+    catch { return []; }
+  }
+  function saveHistory(list) {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(list));
+  }
+  function addToHistory(tema, tom, formato, legenda, hashtags) {
+    const list = getHistory();
+    list.unshift({
+      id: Date.now(),
+      tema,
+      tom,
+      formato,
+      legenda,
+      hashtags,
+      geradoEm: new Date().toLocaleString('pt-BR'),
+    });
+    saveHistory(list.slice(0, 20)); // max 20 itens
+    renderHistory();
+  }
+  function deleteFromHistory(id) {
+    saveHistory(getHistory().filter(i => i.id !== id));
+    renderHistory();
+  }
+  function loadFromHistory(id) {
+    const item = getHistory().find(i => i.id === id);
+    if (!item) return;
+    document.getElementById('tema').value = item.tema;
+    document.getElementById('tom').value  = item.tom;
+    document.getElementById('formato').value = item.formato;
+    mostrarResultado(item.tema, item.tom, item.legenda, item.hashtags);
+  }
+
+  function renderHistory() {
+    const list = getHistory();
+    const el   = document.getElementById('historyList');
+    if (!list.length) {
+      el.innerHTML = '<div class="empty-history">Nenhum rascunho gerado ainda. Crie seu primeiro post acima.</div>';
+      return;
+    }
+    el.innerHTML = '';
+    const tomLabel = { educativo: 'Educativo', motivacional: 'Motivacional', conscientizacao: 'Conscientização' };
+    const fmtLabel = { post: 'Post', carrossel: 'Carrossel', stories: 'Stories' };
+    list.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'history-item';
+      div.innerHTML = `
+        <div class="history-item-info">
+          <div class="history-item-tema">${item.tema}</div>
+          <div class="history-item-meta">${tomLabel[item.tom] || item.tom} · ${fmtLabel[item.formato] || item.formato} · ${item.geradoEm}</div>
+        </div>
+        <div class="history-item-actions">
+          <button class="btn-hist" onclick="loadFromHistory(${item.id})">Ver</button>
+          <button class="btn-hist btn-hist-del" onclick="deleteFromHistory(${item.id})">✕</button>
+        </div>`;
+      el.appendChild(div);
+    });
+  }
+
+  // ── Gerar post ────────────────────────────────────────────
+  async function gerarPost() {
+    const tema    = document.getElementById('tema').value.trim();
+    const tom     = document.getElementById('tom').value;
+    const formato = document.getElementById('formato').value;
+    const errorEl = document.getElementById('errorMsg');
+
+    if (!tema) {
+      errorEl.textContent = 'Por favor, informe o tema do post.';
+      errorEl.classList.add('visible');
+      document.getElementById('tema').focus();
+      return;
+    }
+
+    errorEl.classList.remove('visible');
+    document.getElementById('btnGerar').disabled = true;
+    document.getElementById('spinnerWrap').classList.add('visible');
+    document.getElementById('resultCard').classList.remove('visible');
+
+    try {
+      const res  = await fetch('/gerar-post', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tema, tom, formato }),
+      });
+      const data = await res.json();
+
+      if (!res.ok || data.status !== 'ok') {
+        throw new Error(data.message || 'Erro ao gerar post');
+      }
+
+      mostrarResultado(tema, tom, data.legenda, data.hashtags);
+      addToHistory(tema, tom, formato, data.legenda, data.hashtags);
+
+    } catch (err) {
+      errorEl.textContent = `Erro: ${err.message}`;
+      errorEl.classList.add('visible');
+    } finally {
+      document.getElementById('spinnerWrap').classList.remove('visible');
+      document.getElementById('btnGerar').disabled = false;
+    }
+  }
+
+  function mostrarResultado(tema, tom, legenda, hashtags) {
+    document.getElementById('legendaTA').value  = legenda;
+    document.getElementById('hashtagsTA').value = hashtags;
+    contarChars(document.getElementById('legendaTA'),  'charLegenda',  2200);
+    contarChars(document.getElementById('hashtagsTA'), 'charHashtags', 500);
+
+    const tomLabel = { educativo: 'Educativo', motivacional: 'Motivacional', conscientizacao: 'Conscientização' };
+    document.getElementById('resultMeta').textContent =
+      `${tema} · ${tomLabel[tom] || tom}`;
+
+    document.getElementById('resultCard').classList.add('visible');
+    document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // Reset copy buttons
+    ['btnCopyLegenda','btnCopyHashtags','btnCopyAll'].forEach(id => {
+      const btn = document.getElementById(id);
+      btn.classList.remove('copied');
+      btn.textContent = id === 'btnCopyAll' ? 'Copiar tudo (legenda + hashtags)' : 'Copiar';
+    });
+  }
+
+  function novoPost() {
+    document.getElementById('resultCard').classList.remove('visible');
+    document.getElementById('tema').focus();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── Copiar ────────────────────────────────────────────────
+  async function copiarTexto(taId, btn) {
+    const text = document.getElementById(taId).value;
+    try {
+      await navigator.clipboard.writeText(text);
+      btn.classList.add('copied');
+      btn.textContent = '✓ Copiado';
+      setTimeout(() => { btn.classList.remove('copied'); btn.textContent = 'Copiar'; }, 2000);
+    } catch {
+      document.getElementById(taId).select();
+      document.execCommand('copy');
+    }
+  }
+
+  async function copiarTudo() {
+    const legenda  = document.getElementById('legendaTA').value;
+    const hashtags = document.getElementById('hashtagsTA').value;
+    const btn      = document.getElementById('btnCopyAll');
+    const texto    = `${legenda}\n\n${hashtags}`;
+    try {
+      await navigator.clipboard.writeText(texto);
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = texto;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+    btn.classList.add('copied');
+    btn.textContent = '✓ Copiado!';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.textContent = 'Copiar tudo (legenda + hashtags)';
+    }, 2000);
+  }
+
+  // ── Contador de caracteres ────────────────────────────────
+  function contarChars(ta, counterId, max) {
+    const n  = ta.value.length;
+    const el = document.getElementById(counterId);
+    el.textContent = `${n} / ${max.toLocaleString('pt-BR')} caracteres`;
+    el.className   = `char-count${n > max ? ' over' : ''}`;
+  }
+
+  // ── Enter no campo tema ───────────────────────────────────
+  document.getElementById('tema').addEventListener('keydown', e => {
+    if (e.key === 'Enter') gerarPost();
+  });
+
+  // ── Init ─────────────────────────────────────────────────
+  renderHistory();
+</script>
+
+</body>
+</html>
